@@ -1,9 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import FooterWrapper from "./styled";
 import Container from '@mui/material/Container';
 
 import Logo from '../../assets/images/bookingcare-logo.svg'
 import Bo_Cong_Thuong from '../../assets/images/bo-cong-thuong.svg'
+
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import PhoneIphoneRoundedIcon from '@mui/icons-material/PhoneIphoneRounded';
 
 const Footer = () => {
   return <FooterWrapper>
@@ -14,8 +19,18 @@ const Footer = () => {
           <img className="img-logo" src={Logo} alt='logo'/>
           <div className="information">
             <p className="name">Công ty Cổ phần Công nghệ BookingCare</p>
-            <p className="info">28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội</p>
-            <p className="info">ĐKKD số: 0106790291. Sở KHĐT Hà Nội cấp ngày 16/03/2015</p>
+            <p className="info">
+              <div className="icons">
+                <LocationOnIcon fontSize="small" />
+              </div>
+              28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội
+            </p>
+            <p className="info">
+              <div className="icons">
+                <DoneRoundedIcon fontSize="small"/>
+              </div>
+              ĐKKD số: 0106790291. Sở KHĐT Hà Nội cấp ngày 16/03/2015
+            </p>
             <img className="img-logo-bo" src={Bo_Cong_Thuong} alt='Bo'/>
             <img className="img-logo-bo" src={Bo_Cong_Thuong} alt='Bo'/>
           </div>
@@ -23,12 +38,24 @@ const Footer = () => {
 
         <div className="ft-center">
           <ul>
-            <li>Liên hệ hợp tác</li>
-            <li>Câu hỏi thường gặp</li>
-            <li>Điều khoản sử dụng</li>
-            <li>Chính sách Bảo mật</li>
-            <li>Quy trình hỗ trợ giải quyết khiếu nại</li>
-            <li>Quy chế hoạt động</li>
+            <li>
+              <Link className="link" to={''}>Liên hệ hợp tác</Link>
+            </li>
+            <li>
+              <Link className="link" to={''}>Câu hỏi thường gặp</Link>
+            </li>
+            <li>
+              <Link className="link" to={''}>Điều khoản sử dụng</Link>
+            </li>
+            <li>
+              <Link className="link" to={''}>Chính sách Bảo mật</Link>
+            </li>
+            <li>
+              <Link className="link" to={''}>Quy trình hỗ trợ giải quyết khiếu nại</Link>
+            </li>
+            <li>
+              <Link className="link" to={''}>Quy chế hoạt động</Link>
+            </li>
           </ul>
         </div>
 
@@ -43,7 +70,17 @@ const Footer = () => {
           </ul>
         </div>
       </div>
+
       <div className="footer-bottom">
+        <div className="icons">
+          <PhoneIphoneRoundedIcon fontSize="small"/>
+        </div>
+        <p>
+          Tải ứng dụng BookingCare cho điện thoại hoặc máy tính bảng:&nbsp;
+          <Link className="link" to={''}>Android</Link> -&nbsp; 
+          <Link className="link" to={''}>iPhone/iPad</Link> -&nbsp; 
+          <Link className="link" to={''}>Khác</Link>
+        </p>
       </div>
     </Container>
   </div>

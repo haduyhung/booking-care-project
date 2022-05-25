@@ -5,11 +5,17 @@ const FooterWrapper = styled.div`
 
   .Container{
     padding-top: 30px;
+    
+    .link{
+      text-decoration-line: none;
+      color: #45c3d2;
+    }
 
     & > .footer-top{
       width: 100%;
       justify-content: space-between;
       display: flex;
+      border-bottom: 1px solid gray;
 
       & > .ft-left{
         width: 50%;
@@ -29,6 +35,8 @@ const FooterWrapper = styled.div`
           .info{
             font-size: 16px;
             font-weight: lighter;
+            line-height: 20px;
+            display: flex;
           }
 
           & > .img-logo-bo{
@@ -41,15 +49,15 @@ const FooterWrapper = styled.div`
       & > .ft-center{
         width: 30%;
 
+
         ul{
           list-style: none;
         }
 
         li{
           padding-bottom: 10px;
-          color: #45c3d2;
           font-size: 16px;
-          font-weight: 100;
+          font-weight: 0;
         }
       }
 
@@ -74,15 +82,24 @@ const FooterWrapper = styled.div`
         }
       }
     }
+
+    & > .footer-bottom{
+      padding-bottom: 15px;
+      display: flex;
+
+      .icons{
+        padding-top: 15px;
+      }
+    }
   }
 
-  @media (max-width: 390px) {
+  @media (max-width: 500px) {
     .footer-top{
       width: 100%;
       display: flex;
       flex-direction: column;
 
-      & > .ft-left{
+      .ft-left{
         width: 100%;
       }
 

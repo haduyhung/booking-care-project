@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Layout from "../layout/DefaultLayout";
+import  Layout from "../layout/DefaultLayout";
 import ForDoctorsPage from "../Pages/ForDoctorPage";
 import ForPatientsPage from "../Pages/ForPatientsPage";
 import Home from "../Pages/Home";
