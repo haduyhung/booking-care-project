@@ -45,8 +45,9 @@ const Header = () => {
                     href={page.url}
                     underline="none"
                     color="black"
-                    fontWeight="700"
+                    fontWeight="600"
                     fontSize={13}
+                    lineHeight="18px"
                   >
                     {page.name}
                   </Link>
@@ -57,6 +58,7 @@ const Header = () => {
                       color="black"
                       fontWeight="400"
                       fontSize={11}
+                      lineHeight={1.5}
                     >
                       {page.explain}
                     </Link>
