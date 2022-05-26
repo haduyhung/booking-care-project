@@ -11,6 +11,13 @@ import Avatar from '@mui/material/Avatar';
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 import { Link } from 'react-router-dom';
 
 import * as images from '../../../assets';
@@ -54,7 +61,7 @@ export default function Booking() {
     <div className='introduce'>
       <Container className='container'>
         <Box>
-          <p>Cơ Xương Khớp</p>
+          <p className='specialist-name'>Cơ Xương Khớp</p>
           <p>Bác sĩ Cơ Xương Khớp giỏi</p>
           <p>Danh sách các bác sĩ uy tín đầu ngành Cơ Xương Khớp tại Việt Nam:</p>
             {show ? (
@@ -171,50 +178,121 @@ export default function Booking() {
               </div>
 
               <div className='booking-wp'>
-                <p className='title'>Giá khám:</p>
                 <div className='content'>
-                  <p className='price-txt'>150.000đ</p>
+                  <p className='title'>Giá khám:</p>
+                  {showPL ? null : (
+                    <div className='btn-show'>
+                      <p className='price-txt'>150.000đ</p>
+                      <button className='btn-more' type="button" onClick={handleClickPL}>
+                        Xem chi tiết
+                      </button>
+                    </div>
+                  )}
+                </div>
+                  
+                <div className='show'>
                   {showPL ? (
                     <Portal container={containerPL.current}>
-                      <ul>
-                        <li>Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm</li>
-                        <li>Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội</li>
-                        <li>Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Cơ Xương Khớp - Bệnh viện Bạch Mai, Bệnh viện Hữu nghị Việt Đức,Bệnh Viện E.</li>
-                        <li>Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội Cơ Xương Khớp, Hội Thấp khớp học,...</li>
-                        <li>Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,...</li>
-                      </ul>
+                      <TableContainer component={Paper} sx={{ mt: 1, mb: 1 }}>
+                        <Table sx={{ minWidth: 400, backgroundColor: '#f8f8f8' }} aria-label="a dense table">
+                          <TableBody sx={{padding: 0}}>
+                            <TableRow>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='title-show'>Bảo hiểm Y tế nhà nước</p>
+                                <p className='subtitle-show'>Không áp dụng</p>
+                              </TableCell>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='price'>500.000đ</p>
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='title-show'>Xét nghiệm công thức máu</p>
+                                <p className='subtitle-show'>Theo chỉ định của bác sĩ</p>
+                              </TableCell>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='price'>500.000đ</p>
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+
+                      <p className='title'>Giá dịch vụ liên quan:</p>
+                      <TableContainer component={Paper} sx={{ mt: 1, mb: 1 }}>
+                        <Table sx={{ minWidth: 400, backgroundColor: '#f8f8f8' }} aria-label="a dense table">
+                          <TableBody sx={{padding: 0}}>
+                            <TableRow>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='title-show'>Bảo hiểm Y tế nhà nước</p>
+                                <p className='subtitle-show'>Không áp dụng</p>
+                              </TableCell>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='price'>500.000đ</p>
+                              </TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='title-show'>Xét nghiệm công thức máu</p>
+                                <p className='subtitle-show'>Theo chỉ định của bác sĩ</p>
+                              </TableCell>
+                              <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                <p className='price'>500.000đ</p>
+                              </TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                      
+                      <button className='btn-more' type="button" onClick={handleClickPL}>
+                        Ẩn bảng giá
+                      </button>
                     </Portal>
                   ) : null}
                   <Box ref={containerPL} />
-                  <button className='btn-more' type="button" onClick={handleClickPL}>
-                    {showPL ? 'Ẩn bảng giá' : 'Xem chi tiết'}
-                  </button>
                 </div>
               </div>
 
               <div className='booking-wp'>
-                <p className='title'>Loại bảo hiểm áp dụng.</p>
                 <div className='content'>
+                  <p className='title'>loại bảo hiểm áp dụng.</p>
+                  {showBH ? null : (
+                    <div className='btn-show'>
+                      <button className='btn-more' type="button" onClick={handleClickBH}>
+                        Xem chi tiết
+                      </button>
+                    </div>
+                  )}
+                </div>
+                  
+                <div className='show'>
                   {showBH ? (
                     <Portal container={containerBH.current}>
-                      <ul>
-                        <li>Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm</li>
-                        <li>Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội</li>
-                        <li>Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Cơ Xương Khớp - Bệnh viện Bạch Mai, Bệnh viện Hữu nghị Việt Đức,Bệnh Viện E.</li>
-                        <li>Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội Cơ Xương Khớp, Hội Thấp khớp học,...</li>
-                        <li>Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,...</li>
-                      </ul>
+                      <TableContainer component={Paper} sx={{ mt: 1, mb: 1 }}>
+                        <Table sx={{ minWidth: 400, backgroundColor: '#f8f8f8' }} aria-label="a dense table">
+                          <TableBody sx={{padding: 0}}>
+                              <TableRow>
+                                <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                  <p className='title-show'>Bảo hiểm Y tế nhà nước</p>
+                                  <p className='subtitle-show'>Không áp dụng</p>
+                                </TableCell>
+                              </TableRow>
+                              <TableRow>
+                                <TableCell component="th" scope="row" sx={{padding: 1}}>
+                                  <p className='title-show'>Bảo hiểm bảo lãnh trực tiếp</p>
+                                  <p className='subtitle-show'>Hiện phòng khám chưa có bảo hiểm bảo lãnh trực tiếp, phòng khám xuất hoá đơn tài chính (hoá đơn đỏ) và hỗ trợ bệnh nhân hoàn thiện hồ sơ</p>
+                                </TableCell>
+                              </TableRow>
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                      
                       <button className='btn-more' type="button" onClick={handleClickBH}>
                         Thu gọn
                       </button>
                     </Portal>
-                    ) : null}
-                    <Box ref={containerBH} />
-                    {showBH ? null :
-                      <button className='btn-more' type="button" onClick={handleClickBH}>
-                      Xem chi tiết
-                    </button>
-                    }
+                  ) : null}
+                  <Box ref={containerBH} />
                 </div>
               </div>
             </div>
