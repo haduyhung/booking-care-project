@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Layout from "../layout/DefaultLayout";
-import ForDoctorsPage from "../pages/ForDoctorPage";
-import ForPatientsPage from "../pages/ForPatientsPage";
-import Home from "../pages/Home";
-import NotFound from "../pages/NotFoundPage";
+import ForDoctorsPage from "../Pages/ForDoctorPage";
+import ForPatientsPage from "../Pages/ForPatientsPage";
+import Home from "../Pages/Home";
+import NotFound from "../Pages/NotFoundPage";
 
 const Router = () => {
   return (
