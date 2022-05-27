@@ -1,5 +1,6 @@
 import Logo from "./images/Logo.svg";
 import Bo_Cong_Thuong from "./images/bo-cong-thuong.svg";
+import GS_Tran_Ngoc_An from "./images/151800292142135730131997187173031663525568184320n.jpg"
 import SearchBackground from "./images/SearchBackground.jpg";
 import AppStoreBadge from "./images/app-store-badge-black.svg";
 import KhamChuyenKhoa from "./images/133537-khamchuyenkhoa.png";
@@ -24,4 +25,5 @@ export {
   KhamNhaKhoa,
   GoiPhauThuat,
   SanPhamYTe,
+  GS_Tran_Ngoc_An,
 };
