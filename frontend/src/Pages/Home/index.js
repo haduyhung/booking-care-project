@@ -4,6 +4,7 @@ import * as images from "../../assets/index";
 import { Box } from "@mui/system";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Divider, Grid, Link, TextField } from "@mui/material";
+import FormItem from "../../components/molecules/FormItem";
 
 const specialties = [
   {
@@ -171,6 +172,13 @@ const Home = () => {
           ))}
         </Grid>
       </HomeContainer>
+
+      <FormItem
+        label="Chuyên khoa phổ biến"
+        options={options}
+        bgcolor="#f5f5f5"
+        buttonTitle="XEM THÊM"
+      />
     </Box>
   );
 };
@@ -215,6 +223,43 @@ const specialtiesButton = [
     name: "Sản Phẩm Y Tế",
     url: "/",
     image: images.SanPhamYTe,
+  },
+];
+
+const options = [
+  {
+    title: "Cơ Xương Khớp",
+    image:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg",
+  },
+  {
+    title: "Thần Kinh",
+    image: "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121042-than-kinh.jpg",
+  },
+  {
+    title: "Tiêu hóa",
+    image: "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120933-tieu-hoa.jpg",
+  },
+  {
+    title: "Tim mạch",
+    image: "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120741-tim-mach.jpg",
+  },
+  {
+    title: "Tai mũi họng",
+    image:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg",
+  },
+  {
+    title: "Cột sống",
+    image: "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121042-than-kinh.jpg",
+  },
+  {
+    title: "Y học cổ truyền",
+    image: "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120933-tieu-hoa.jpg",
+  },
+  {
+    title: "Châm cứu",
+    image: "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120741-tim-mach.jpg",
   },
 ];
 
