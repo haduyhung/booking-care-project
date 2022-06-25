@@ -18,6 +18,7 @@ export const HomeContainer = styled("div")({
   backgroundSize: "cover",
   boxShadow: "#ffffff 0px -60px 50px 0px inset",
   display: "flex",
+  paddingBottom: 30,
   justifyContent: "center",
   flexDirection: "column",
   alignItems: "center",
