@@ -28,7 +28,7 @@ const drawerPages = [
   { name: "Liên kết hợp tác", url: "/" },
 ];
 const aboutPages = [
-  { name: "Dành cho bệnh nhân", url: "/" },
+  { name: "Dành cho bệnh nhân", url: "/ForPatientsPage" },
   { name: "Dành cho bác sĩ", url: "/" },
   { name: "Vai trò của Booking care", url: "/" },
   { name: "Liên hệ", url: "/" },
@@ -51,7 +51,7 @@ const Header = () => {
         {drawerPages.map((page, index) => (
           <div key={index}>
             <Link
-              href="/"
+              href={page.url}
               underline="none"
               color="#45C3DB"
               fontWeight="400"
@@ -59,7 +59,7 @@ const Header = () => {
               lineHeight={1.5}
               py={1.5}
               px={1.5}
-              maxWidth={260}
+              display="flex"
             >
               {page.name}
             </Link>
@@ -72,14 +72,14 @@ const Header = () => {
         {aboutPages.map((page, index) => (
           <div key={index}>
             <Link
-              href="/"
+              href={page.url}
               underline="none"
               color="#45C3DB"
               fontWeight="400"
               fontSize={15}
               lineHeight={1.5}
               p={1.5}
-              maxWidth={260}
+              display="flex"
             >
               {page.name}
             </Link>
