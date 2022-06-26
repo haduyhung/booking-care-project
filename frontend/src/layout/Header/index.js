@@ -22,7 +22,7 @@ const pages = [
     explain: "Chọn bệnh viện phòng khám",
     url: "/FacilitiesPage",
   },
-  { name: "Bác sĩ", explain: "Chọn bác sĩ giỏi", url: "/" },
+  { name: "Bác sĩ", explain: "Chọn bác sĩ giỏi", url: "/DoctorsListPage" },
   { name: "Gói khám", explain: "Khám sức khoẻ tổng quát", url: "/" },
 ];
 
