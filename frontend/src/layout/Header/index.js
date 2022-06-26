@@ -17,7 +17,11 @@ import { FaYoutubeSquare } from "react-icons/fa";
 
 const pages = [
   { name: "Chuyên khoa", explain: "Tìm bác sĩ chuyên khoa", url: "/" },
-  { name: "Cơ sở y tế", explain: "Chọn bệnh viện phòng khám", url: "/" },
+  {
+    name: "Cơ sở y tế",
+    explain: "Chọn bệnh viện phòng khám",
+    url: "/FacilitiesPage",
+  },
   { name: "Bác sĩ", explain: "Chọn bác sĩ giỏi", url: "/" },
   { name: "Gói khám", explain: "Khám sức khoẻ tổng quát", url: "/" },
 ];
