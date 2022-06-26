@@ -23,7 +23,11 @@ const pages = [
     url: "/FacilitiesPage",
   },
   { name: "Bác sĩ", explain: "Chọn bác sĩ giỏi", url: "/DoctorsListPage" },
-  { name: "Gói khám", explain: "Khám sức khoẻ tổng quát", url: "/" },
+  {
+    name: "Gói khám",
+    explain: "Khám sức khoẻ tổng quát",
+    url: "/ExaminationPackagesPage",
+  },
 ];
 
 const drawerPages = [
