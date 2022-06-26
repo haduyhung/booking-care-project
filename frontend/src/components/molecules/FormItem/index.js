@@ -2,12 +2,14 @@ import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
 
-function FormItem({ bgcolor, options, label, buttonTitle }) {
+function FormItem({ bgcolor, options, label, buttonTitle, itemPerRow }) {
   const settings = {
-    dots: true,
+    // autoplay: true,
+    // autoplaySpeed: 30000,
+    arrows: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: itemPerRow,
+    slidesToScroll: itemPerRow,
   };
 
   return (
@@ -34,17 +36,46 @@ function FormItem({ bgcolor, options, label, buttonTitle }) {
           {options.map((option, index) => (
             <Grid
               key={index}
-              xs={3}
-              sx={{ px: 1, hover: { color: "#45c3d2" } }}
+              xs={12 / itemPerRow}
+              px={1}
+              onDoubleClick={() => {
+                alert("navigation");
+              }}
             >
-              <Avatar
-                sx={{ height: 128, width: "auto", borderRadius: 0 }}
-                src={option.image}
-                alt=""
-              />
-              <Typography sx={{ fontSize: 13 }} py={1}>
-                {option.title}
-              </Typography>
+              <Stack
+                sx={
+                  !!option.work && {
+                    alignItems: "center",
+                    height: 280,
+                    p: 3,
+                    border: "1px solid #efeef5",
+                  }
+                }
+              >
+                <Avatar
+                  sx={
+                    !!option.work
+                      ? { width: 120, height: 120 }
+                      : { height: 128, width: "auto", borderRadius: 0 }
+                  }
+                  src={option.image}
+                  alt=""
+                />
+                <Typography
+                  py={1}
+                  fontSize={13}
+                  sx={!!option.work && { textAlign: "center" }}
+                >
+                  {option.title}
+                </Typography>
+                <Typography
+                  color="#555"
+                  fontSize={12}
+                  sx={!!option.work && { textAlign: "center" }}
+                >
+                  {option.work}
+                </Typography>
+              </Stack>
             </Grid>
           ))}
         </Slider>
