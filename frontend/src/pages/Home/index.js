@@ -211,7 +211,7 @@ const Home = () => {
           <ReactPlayer flex={1} url="https://youtu.be/FyDQljKtWnI" />
           <Grid flex={1} container px={1} spacing={3}>
             {medias.map((media, index) => (
-              <Grid xs={4} item key={index}>
+              <Grid xs={6} item key={index}>
                 <Link href={media.link}>
                   <img src={media.image} alt="" />
                 </Link>
