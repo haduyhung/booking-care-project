@@ -158,6 +158,8 @@ const Home = () => {
         </Grid>
       </HomeContainer>
 
+      <SliderAutoForm options={autoplaySliderOptions.options} />
+
       <SliderForm
         label={firstOptions.label}
         options={firstOptions.options}
@@ -281,6 +283,71 @@ const specialtiesButton = [
     image: images.SanPhamYTe,
   },
 ];
+
+const autoplaySliderOptions = {
+  options: [
+    {
+      title: "Ưu đãi 50% phí khám tại Phòng khám Mediplus",
+      image:
+        "https://cdn.bookingcare.vn/fo/2022/06/14/090430-uu-dai-di-kham-mediplus.jpg",
+      info: [
+        { id: 1, text: "Áp dụng với khách hàng đặt lịch qua BookingCare" },
+        {
+          id: 2,
+          text: "Áp dụng với chuyên khoa Cơ xương khớp, Tim mạch và Tiêu hóa",
+        },
+      ],
+    },
+    {
+      title: "Bệnh viện Quốc tế City: Ưu đãi nội soi tiêu hóa",
+      image: "https://cdn.bookingcare.vn/fo/2022/06/07/101348-website.jpg",
+      info: [
+        { id: 1, text: "Ưu đãi 15% phí nội soi đường tiêu hóa" },
+        { id: 2, text: "Bác sĩ chuyên môn cao" },
+        { id: 3, text: "Trang thiết bị hiện đại" },
+      ],
+    },
+    {
+      title: "Xét nghiệm COVID",
+      image: "https://cdn.bookingcare.vn/fo/2021/07/27/140801-test-covid.jpg",
+      info: [
+        { id: 1, text: "Tầm soát và xác định COVID-19" },
+        { id: 2, text: "Phương pháp Test nhanh & PCR" },
+        { id: 3, text: "Theo quy chuẩn Bộ Y tế" },
+      ],
+    },
+    {
+      title: "Tư vấn F0 điều trị tại nhà",
+      image:
+        "https://cdn.bookingcare.vn/fo/2022/02/23/173702-ca03c7ec7699e0c21a18096495e31ab5.jpg",
+      info: [
+        { id: 1, text: "Đội ngũ bác sĩ giỏi, giàu kinh nghiệm" },
+        { id: 2, text: "Tư vấn F0 điều trị tại nhà" },
+        { id: 3, text: "Đối tượng áp dụng: F0, F1" },
+      ],
+    },
+    {
+      title: "Kit Test COVID bằng nước bọt",
+      image:
+        "https://cdn.bookingcare.vn/fo/2022/01/21/170022-kit-test-nhanh.png",
+      info: [
+        { id: 1, text: "Kit Test nhanh bằng nước bọt" },
+        { id: 2, text: "Đơn giản, tiện lợi, chính xác" },
+        { id: 3, text: "Bộ Y tế Việt Nam cấp chứng nhận" },
+      ],
+    },
+    {
+      title: "Tư vấn phẫu thuật bao quy đầu trọn gói",
+      image:
+        "https://cdn.bookingcare.vn/fo/2022/05/18/115424-221d510df8a339fd60b2.jpg",
+      info: [
+        { id: 1, text: "Thực hiện bởi bác sĩ Nam học" },
+        { id: 2, text: "Thực hiện tại cơ sở y tế" },
+        { id: 3, text: "Chi phí minh bạch" },
+      ],
+    },
+  ],
+};
 
 const firstOptions = {
   label: "Bác sĩ từ xa qua Video",

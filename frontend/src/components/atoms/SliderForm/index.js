@@ -16,7 +16,8 @@ function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
     <Stack
       sx={{
         minHeight: 330,
-        p: 8,
+        py: 3,
+        px: 8,
         bgcolor: bgcolor,
         borderBottom: "3px solid #efeef5",
       }}
