@@ -8,6 +8,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
 
+//test commits
+
 const Footer = () => {
   return (
     <FooterWrapper>
