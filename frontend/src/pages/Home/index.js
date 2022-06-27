@@ -113,6 +113,7 @@ const Home = () => {
         <Grid
           container
           maxWidth="lg"
+          justifyContent="center"
           columns={{ lg: 16, md: 12, sm: 6, xs: 6 }}
           spacing={3}
           direction="row"
