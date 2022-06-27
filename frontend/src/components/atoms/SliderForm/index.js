@@ -24,13 +24,15 @@ function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
     >
       <Stack direction="row">
         <Typography
-          sx={{ flex: 5, fontSize: 24, fontWeight: "bold", pt: 4, pb: 1 }}
+          sx={{ flex: 7, fontSize: 24, fontWeight: "bold", pt: 3, pb: 1 }}
         >
           {label}
         </Typography>
-        <Button sx={{ borderRadius: 1, flex: 1, height: 40 }}>
-          <Typography>{buttonTitle}</Typography>
-        </Button>
+        {buttonTitle.map((item, index) => (
+          <Button key={index} sx={{ borderRadius: 1, flex: 1, height: 40 }}>
+            <Typography>{item.title}</Typography>
+          </Button>
+        ))}
       </Stack>
       <Stack sx={{ mt: 5 }}>
         <Slider {...settings}>

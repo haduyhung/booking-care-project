@@ -199,6 +199,14 @@ const Home = () => {
         buttonTitle={fifthOptions.buttonTitle}
         itemPerRow={fifthOptions.itemPerRow}
       />
+
+      <SliderForm
+        label={sixthOptions.label}
+        options={sixthOptions.options}
+        bgcolor={sixthOptions.color}
+        buttonTitle={sixthOptions.buttonTitle}
+        itemPerRow={sixthOptions.itemPerRow}
+      />
     </Box>
   );
 };
@@ -352,7 +360,7 @@ const autoplaySliderOptions = {
 const firstOptions = {
   label: "Bác sĩ từ xa qua Video",
   color: "#f5f5f5",
-  buttonTitle: "XEM THÊM",
+  buttonTitle: [{ title: "XEM THÊM" }],
   itemPerRow: 4,
   options: [
     {
@@ -400,7 +408,7 @@ const firstOptions = {
 const secondOptions = {
   label: "Chuyên khoa phổ biến",
   color: "#fff",
-  buttonTitle: "XEM THÊM",
+  buttonTitle: [{ title: "XEM THÊM" }],
   itemPerRow: 4,
   options: [
     {
@@ -449,7 +457,7 @@ const secondOptions = {
 const thirdOptions = {
   label: "Cơ sở y tế nổi bật",
   color: "#f5f5f5",
-  buttonTitle: "TÌM KIẾM",
+  buttonTitle: [{ title: "TÌM KIẾM" }],
   itemPerRow: 4,
   options: [
     {
@@ -498,7 +506,7 @@ const thirdOptions = {
 const forthOptions = {
   label: "Bác sĩ nổi bật tuần qua",
   color: "#fff",
-  buttonTitle: "XEM THÊM",
+  buttonTitle: [{ title: "XEM THÊM" }],
   itemPerRow: 4,
   options: [
     {
@@ -554,7 +562,41 @@ const forthOptions = {
 const fifthOptions = {
   label: "Cẩm nang",
   color: "#f5f5f5",
-  buttonTitle: "TẤT CẢ BÀI VIẾT",
+  buttonTitle: [{ title: "TẤT CẢ BÀI VIẾT" }],
+  itemPerRow: 2,
+  options: [
+    {
+      title:
+        "Phòng khám Nội An Phước có tốt không: Bác sĩ giỏi? Review đi khám? ",
+      image:
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/205329-phong-kham-noi-an-phuoc.jpg",
+    },
+    {
+      title: "Phòng khám CHAC: Có tốt không? Review thực tế từ người bệnh",
+      image:
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/113239-phong-kham-chac-co-tot-khong.jpg",
+    },
+    {
+      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
+      image:
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/161628-nha-khoa-quan-9.jpg",
+    },
+    {
+      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
+      image:
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/233108-nha-khoa-uy-tin-quan-2.jpg",
+    },
+  ],
+};
+
+const sixthOptions = {
+  label: "Dành cho bác sĩ và cơ sở y tế",
+  color: "#fff",
+  buttonTitle: [
+    { title: "BÀI VIẾT" },
+    { title: "HỢP TÁC" },
+    { title: "LIÊN HỆ" },
+  ],
   itemPerRow: 2,
   options: [
     {

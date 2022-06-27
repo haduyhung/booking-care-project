@@ -47,6 +47,7 @@ function SliderAutoForm({ options }) {
                     </li>
                   ))}
                 </ul>
+                <Button>Xem Chi Tiết</Button>
               </Stack>
             </Grid>
           ))}
