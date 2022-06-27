@@ -11,7 +11,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import FormItem from "../../components/molecules/FormItem";
+import SliderAutoForm from "../../components/atoms/SliderAutoForm";
+import SliderForm from "../../components/atoms/SliderForm";
 
 const Home = () => {
   return (
@@ -157,7 +158,7 @@ const Home = () => {
         </Grid>
       </HomeContainer>
 
-      <FormItem
+      <SliderForm
         label={firstOptions.label}
         options={firstOptions.options}
         bgcolor={firstOptions.color}
@@ -165,7 +166,7 @@ const Home = () => {
         itemPerRow={firstOptions.itemPerRow}
       />
 
-      <FormItem
+      <SliderForm
         label={secondOptions.label}
         options={secondOptions.options}
         bgcolor={secondOptions.color}
@@ -173,7 +174,7 @@ const Home = () => {
         itemPerRow={secondOptions.itemPerRow}
       />
 
-      <FormItem
+      <SliderForm
         label={thirdOptions.label}
         options={thirdOptions.options}
         bgcolor={thirdOptions.color}
@@ -181,7 +182,7 @@ const Home = () => {
         itemPerRow={thirdOptions.itemPerRow}
       />
 
-      <FormItem
+      <SliderForm
         label={forthOptions.label}
         options={forthOptions.options}
         bgcolor={forthOptions.color}
@@ -189,7 +190,7 @@ const Home = () => {
         itemPerRow={forthOptions.itemPerRow}
       />
 
-      <FormItem
+      <SliderForm
         label={fifthOptions.label}
         options={fifthOptions.options}
         bgcolor={fifthOptions.color}
@@ -484,50 +485,31 @@ const forthOptions = {
 };
 
 const fifthOptions = {
-  label: "Cơ sở y tế nổi bật",
+  label: "Cẩm nang",
   color: "#f5f5f5",
-  buttonTitle: "XEM THÊM",
+  buttonTitle: "TẤT CẢ BÀI VIẾT",
   itemPerRow: 2,
   options: [
     {
-      title: "Cơ Xương Khớp",
+      title:
+        "Phòng khám Nội An Phước có tốt không: Bác sĩ giỏi? Review đi khám? ",
       image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg",
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/205329-phong-kham-noi-an-phuoc.jpg",
     },
     {
-      title: "Thần Kinh",
+      title: "Phòng khám CHAC: Có tốt không? Review thực tế từ người bệnh",
       image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121042-than-kinh.jpg",
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/113239-phong-kham-chac-co-tot-khong.jpg",
     },
     {
-      title: "Tiêu hóa",
+      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
       image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120933-tieu-hoa.jpg",
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/161628-nha-khoa-quan-9.jpg",
     },
     {
-      title: "Tim mạch",
+      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
       image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120741-tim-mach.jpg",
-    },
-    {
-      title: "Tai mũi họng",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg",
-    },
-    {
-      title: "Cột sống",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121042-than-kinh.jpg",
-    },
-    {
-      title: "Y học cổ truyền",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120933-tieu-hoa.jpg",
-    },
-    {
-      title: "Châm cứu",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120741-tim-mach.jpg",
+        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/233108-nha-khoa-uy-tin-quan-2.jpg",
     },
   ],
 };

@@ -2,10 +2,10 @@ import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import Slider from "react-slick";
 
-function FormItem({ bgcolor, options, label, buttonTitle, itemPerRow }) {
+function SliderAutoForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
   const settings = {
-    // autoplay: true,
-    // autoplaySpeed: 30000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     arrows: false,
     speed: 500,
     slidesToShow: itemPerRow,
@@ -43,6 +43,8 @@ function FormItem({ bgcolor, options, label, buttonTitle, itemPerRow }) {
               }}
             >
               <Stack
+                direction={itemPerRow === 2 ? "row" : "column"}
+                spacing={itemPerRow === 2 ? 2 : 0}
                 sx={
                   !!option.work && {
                     alignItems: "center",
@@ -62,8 +64,8 @@ function FormItem({ bgcolor, options, label, buttonTitle, itemPerRow }) {
                   alt=""
                 />
                 <Typography
-                  py={1}
-                  fontSize={13}
+                  py={itemPerRow === 2 ? 0 : 1}
+                  fontSize={itemPerRow === 2 ? 16 : 13}
                   sx={!!option.work && { textAlign: "center" }}
                 >
                   {option.title}
@@ -84,4 +86,4 @@ function FormItem({ bgcolor, options, label, buttonTitle, itemPerRow }) {
   );
 }
 
-export default FormItem;
+export default SliderAutoForm;
