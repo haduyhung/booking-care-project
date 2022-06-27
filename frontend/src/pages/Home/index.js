@@ -11,6 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import ReactPlayer from "react-player";
 import SliderAutoForm from "../../components/atoms/SliderAutoForm";
 import SliderForm from "../../components/atoms/SliderForm";
 
@@ -200,6 +201,28 @@ const Home = () => {
         itemPerRow={fifthOptions.itemPerRow}
       />
 
+      <Stack px={8} py={3} spacing={2}>
+        <Typography
+          sx={{ flex: 7, fontSize: 24, fontWeight: "bold", pt: 3, pb: 1 }}
+        >
+          Truyền thông nói về BookingCare
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <ReactPlayer flex={1} url="https://youtu.be/FyDQljKtWnI" />
+          <Grid flex={1} container px={1} spacing={3}>
+            {medias.map((media, index) => (
+              <Grid xs={4} item key={index}>
+                <Link href={media.link}>
+                  <img src={media.image} alt="" />
+                </Link>
+              </Grid>
+            ))}
+          </Grid>
+        </Stack>
+      </Stack>
+
+      <Stack></Stack>
+
       <SliderForm
         label={sixthOptions.label}
         options={sixthOptions.options}
@@ -289,6 +312,42 @@ const specialtiesButton = [
     name: "Sản Phẩm Y Tế",
     url: "/",
     image: images.SanPhamYTe,
+  },
+];
+
+const medias = [
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/suckhoedoisong.png",
+    link: "https://suckhoedoisong.vn/dat-lich-kham-benh-tiet-kiem-thong-minh-va-hieu-qua-169153232.htm",
+  },
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/vtv1.png",
+    link: "https://vtv.vn/video/ca-phe-khoi-nghiep-14-11-2018-334894.htm",
+  },
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/ictnews.png",
+    link: "https://ictnews.vietnamnet.vn/",
+  },
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/vnexpress.png",
+    link: "https://video.vnexpress.net/cuoc-song-4-0/kham-benh-khong-phai-xep-hang-o-ha-noi-3797126.html",
+  },
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/ictnews.png",
+    link: "https://infonet.vietnamnet.vn/khoe-dep/da-co-hon-20-000-luot-benh-nhan-dat-lich-kham-qua-bookingcare-175080.html",
+  },
+  {
+    image:
+      "https://bookingcare.vn/assets/truyenthong/cuc-cong-nghe-thong-tin-bo-y-te-2.png",
+    link: "https://ehealth.gov.vn/?action=News&newsId=46094",
+  },
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/vtv1.png",
+    link: "https://vtv.vn/video/ca-phe-khoi-nghiep-16-8-2018-317687.htm",
+  },
+  {
+    image: "https://bookingcare.vn/assets/truyenthong/vtv1.png",
+    link: "https://vtv.vn/video/ca-phe-khoi-nghiep-21-02-2018-282723.htm",
   },
 ];
 

@@ -69,7 +69,11 @@ function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
                 <Typography
                   py={itemPerRow === 2 ? 0 : 1}
                   fontSize={itemPerRow === 2 ? 16 : 13}
-                  sx={!!option.work && { textAlign: "center" }}
+                  sx={
+                    !!option.work
+                      ? { textAlign: "center", "&:hover": { color: "#45c3d2" } }
+                      : { "&:hover": { color: "#45c3d2" } }
+                  }
                 >
                   {option.title}
                 </Typography>
