@@ -1,15 +1,26 @@
 import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 
 function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    //Resize
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    //cleanup fs
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const settings = {
-    // autoplay: true,
-    // autoplaySpeed: 30000,
     arrows: false,
     speed: 500,
-    slidesToShow: itemPerRow,
-    slidesToScroll: itemPerRow,
+    slidesToShow: width < 500 ? 1 : 4,
+    slidesToScroll: width < 500 ? 1 : 4,
   };
 
   return (
@@ -17,15 +28,13 @@ function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
       sx={{
         minHeight: 330,
         py: 3,
-        px: 8,
+        px: width < 500 ? 3 : 8,
         bgcolor: bgcolor,
         borderBottom: "3px solid #efeef5",
       }}
     >
-      <Stack direction="row">
-        <Typography
-          sx={{ flex: 7, fontSize: 24, fontWeight: "bold", pt: 3, pb: 1 }}
-        >
+      <Stack pt={3} direction="row">
+        <Typography sx={{ flex: 7, fontSize: 24, fontWeight: "bold", pb: 1 }}>
           {label}
         </Typography>
         {buttonTitle.map((item, index) => (
@@ -39,15 +48,14 @@ function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
           {options.map((option, index) => (
             <Grid
               key={index}
-              xs={12 / itemPerRow}
+              xs={width < 500 ? 12 : 3}
               px={1}
               onDoubleClick={() => {
                 alert("navigation");
               }}
             >
               <Stack
-                direction={itemPerRow === 2 ? "row" : "column"}
-                spacing={itemPerRow === 2 ? 2 : 0}
+                direction="column"
                 sx={
                   !!option.work && {
                     alignItems: "center",
@@ -67,8 +75,8 @@ function SliderForm({ bgcolor, options, label, buttonTitle, itemPerRow }) {
                   alt=""
                 />
                 <Typography
-                  py={itemPerRow === 2 ? 0 : 1}
-                  fontSize={itemPerRow === 2 ? 16 : 13}
+                  py={1}
+                  fontSize={13}
                   sx={
                     !!option.work
                       ? { textAlign: "center", "&:hover": { color: "#45c3d2" } }

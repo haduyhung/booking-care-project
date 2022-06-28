@@ -32,6 +32,7 @@ const Home = () => {
             NỀN TẢNG Y TẾ
           </Typography>
           <Typography
+            align="center"
             variant="h4"
             sx={{
               fontWeight: "bold",
@@ -167,7 +168,6 @@ const Home = () => {
         options={firstOptions.options}
         bgcolor={firstOptions.color}
         buttonTitle={firstOptions.buttonTitle}
-        itemPerRow={firstOptions.itemPerRow}
       />
 
       <SliderForm
@@ -175,7 +175,6 @@ const Home = () => {
         options={secondOptions.options}
         bgcolor={secondOptions.color}
         buttonTitle={secondOptions.buttonTitle}
-        itemPerRow={secondOptions.itemPerRow}
       />
 
       <SliderForm
@@ -183,54 +182,21 @@ const Home = () => {
         options={thirdOptions.options}
         bgcolor={thirdOptions.color}
         buttonTitle={thirdOptions.buttonTitle}
-        itemPerRow={thirdOptions.itemPerRow}
       />
 
-      <SliderForm
-        label={forthOptions.label}
-        options={forthOptions.options}
-        bgcolor={forthOptions.color}
-        buttonTitle={forthOptions.buttonTitle}
-        itemPerRow={forthOptions.itemPerRow}
-      />
-
-      <SliderForm
-        label={fifthOptions.label}
-        options={fifthOptions.options}
-        bgcolor={fifthOptions.color}
-        buttonTitle={fifthOptions.buttonTitle}
-        itemPerRow={fifthOptions.itemPerRow}
-      />
-
-      <Stack px={8} py={3} spacing={2}>
+      <Stack px={8} py={3}>
         <Typography
           sx={{ flex: 7, fontSize: 24, fontWeight: "bold", pt: 3, pb: 1 }}
         >
           Truyền thông nói về BookingCare
         </Typography>
-        <Stack direction="row" spacing={2}>
-          <ReactPlayer flex={1} url="https://youtu.be/FyDQljKtWnI" />
-          <Grid flex={1} container px={1} spacing={3}>
-            {medias.map((media, index) => (
-              <Grid xs={6} item key={index}>
-                <Link href={media.link}>
-                  <img src={media.image} alt="" />
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
+        <Stack
+          direction={{ mobile: "row", desktop: "column" }}
+          alignItems="center"
+        >
+          <ReactPlayer url="https://youtu.be/FyDQljKtWnI" />
         </Stack>
       </Stack>
-
-      <Stack></Stack>
-
-      <SliderForm
-        label={sixthOptions.label}
-        options={sixthOptions.options}
-        bgcolor={sixthOptions.color}
-        buttonTitle={sixthOptions.buttonTitle}
-        itemPerRow={sixthOptions.itemPerRow}
-      />
     </Box>
   );
 };
@@ -316,42 +282,6 @@ const specialtiesButton = [
   },
 ];
 
-const medias = [
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/suckhoedoisong.png",
-    link: "https://suckhoedoisong.vn/dat-lich-kham-benh-tiet-kiem-thong-minh-va-hieu-qua-169153232.htm",
-  },
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/vtv1.png",
-    link: "https://vtv.vn/video/ca-phe-khoi-nghiep-14-11-2018-334894.htm",
-  },
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/ictnews.png",
-    link: "https://ictnews.vietnamnet.vn/",
-  },
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/vnexpress.png",
-    link: "https://video.vnexpress.net/cuoc-song-4-0/kham-benh-khong-phai-xep-hang-o-ha-noi-3797126.html",
-  },
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/ictnews.png",
-    link: "https://infonet.vietnamnet.vn/khoe-dep/da-co-hon-20-000-luot-benh-nhan-dat-lich-kham-qua-bookingcare-175080.html",
-  },
-  {
-    image:
-      "https://bookingcare.vn/assets/truyenthong/cuc-cong-nghe-thong-tin-bo-y-te-2.png",
-    link: "https://ehealth.gov.vn/?action=News&newsId=46094",
-  },
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/vtv1.png",
-    link: "https://vtv.vn/video/ca-phe-khoi-nghiep-16-8-2018-317687.htm",
-  },
-  {
-    image: "https://bookingcare.vn/assets/truyenthong/vtv1.png",
-    link: "https://vtv.vn/video/ca-phe-khoi-nghiep-21-02-2018-282723.htm",
-  },
-];
-
 const autoplaySliderOptions = {
   options: [
     {
@@ -418,58 +348,9 @@ const autoplaySliderOptions = {
 };
 
 const firstOptions = {
-  label: "Bác sĩ từ xa qua Video",
+  label: "Chuyên khoa phổ biến",
   color: "#f5f5f5",
   buttonTitle: [{ title: "XEM THÊM" }],
-  itemPerRow: 4,
-  options: [
-    {
-      title: "Tư vấn, trị liệu Tâm lý từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2020/12/20/111237-tam-ly-2.jpg",
-    },
-    {
-      title: "Sức khỏe tâm thần từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2020/12/09/100650-doctor-57101521920.jpg",
-    },
-    {
-      title: "Bác sĩ Da liễu từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/11/04/163921da-lieu-hn.jpg",
-    },
-    {
-      title: "Bác sĩ Cơ-Xương-Khớp từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/02/27/165326kham-benh-co-xuong-khop-1.jpg",
-    },
-    {
-      title: "Bác sĩ Cột sống từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2020/03/04/094112-quy-trinh-kham-cot-song-benh-vien-viet-duc.jpg",
-    },
-    {
-      title: "Bác sĩ Tiêu hóa từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2018/01/17/171636bac-si-tieu-hoa.jpg",
-    },
-    {
-      title: "Bác sĩ Nội khoa từ xa",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120741-tim-mach.jpg",
-    },
-    {
-      title: "Bác sĩ Nam học từ xa",
-      image: "https://cdn.bookingcare.vn/fr/w300/2018/10/16/151254nam-hoc.jpg",
-    },
-  ],
-};
-
-const secondOptions = {
-  label: "Chuyên khoa phổ biến",
-  color: "#fff",
-  buttonTitle: [{ title: "XEM THÊM" }],
-  itemPerRow: 4,
   options: [
     {
       title: "Cơ Xương Khớp",
@@ -514,11 +395,10 @@ const secondOptions = {
   ],
 };
 
-const thirdOptions = {
+const secondOptions = {
   label: "Cơ sở y tế nổi bật",
-  color: "#f5f5f5",
+  color: "#fff",
   buttonTitle: [{ title: "TÌM KIẾM" }],
-  itemPerRow: 4,
   options: [
     {
       title: "Bệnh viện Hữu nghị Việt Đức",
@@ -563,11 +443,10 @@ const thirdOptions = {
   ],
 };
 
-const forthOptions = {
+const thirdOptions = {
   label: "Bác sĩ nổi bật tuần qua",
-  color: "#fff",
+  color: "#f5f5f5",
   buttonTitle: [{ title: "XEM THÊM" }],
-  itemPerRow: 4,
   options: [
     {
       title: "Bác sĩ Chuyên khoa II Trần Minh Khuyên",
@@ -615,70 +494,6 @@ const forthOptions = {
       image:
         "https://cdn.bookingcare.vn/fr/w200/2018/04/09/151800292142135730131997187173031663525568184320n.jpg",
       work: "Cơ Xương Khớp",
-    },
-  ],
-};
-
-const fifthOptions = {
-  label: "Cẩm nang",
-  color: "#f5f5f5",
-  buttonTitle: [{ title: "TẤT CẢ BÀI VIẾT" }],
-  itemPerRow: 2,
-  options: [
-    {
-      title:
-        "Phòng khám Nội An Phước có tốt không: Bác sĩ giỏi? Review đi khám? ",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/205329-phong-kham-noi-an-phuoc.jpg",
-    },
-    {
-      title: "Phòng khám CHAC: Có tốt không? Review thực tế từ người bệnh",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/113239-phong-kham-chac-co-tot-khong.jpg",
-    },
-    {
-      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/161628-nha-khoa-quan-9.jpg",
-    },
-    {
-      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/233108-nha-khoa-uy-tin-quan-2.jpg",
-    },
-  ],
-};
-
-const sixthOptions = {
-  label: "Dành cho bác sĩ và cơ sở y tế",
-  color: "#fff",
-  buttonTitle: [
-    { title: "BÀI VIẾT" },
-    { title: "HỢP TÁC" },
-    { title: "LIÊN HỆ" },
-  ],
-  itemPerRow: 2,
-  options: [
-    {
-      title:
-        "Phòng khám Nội An Phước có tốt không: Bác sĩ giỏi? Review đi khám? ",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/205329-phong-kham-noi-an-phuoc.jpg",
-    },
-    {
-      title: "Phòng khám CHAC: Có tốt không? Review thực tế từ người bệnh",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/26/113239-phong-kham-chac-co-tot-khong.jpg",
-    },
-    {
-      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/161628-nha-khoa-quan-9.jpg",
-    },
-    {
-      title: "Nha khoa tốt Quận 9: Lựa chọn địa chỉ nào chăm sóc răng miệng?",
-      image:
-        "https://cdn.bookingcare.vn/fr/w300/2022/06/24/233108-nha-khoa-uy-tin-quan-2.jpg",
     },
   ],
 };

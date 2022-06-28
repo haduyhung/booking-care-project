@@ -1,14 +1,27 @@
 import { Avatar, Button, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 
 function SliderAutoForm({ options }) {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    //Resize
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    //cleanup fs
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const settings = {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: width < 500 ? 1 : 4,
     slidesToScroll: 1,
   };
 
