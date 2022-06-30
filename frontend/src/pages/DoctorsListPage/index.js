@@ -105,7 +105,7 @@ const doctorsList = [
     imageURL:
       "https://cdn.bookingcare.vn/fr/w200/2021/01/18/105401-bsckii-tran-minh-khuyen.jpg",
     dept: "Sức khoẻ tâm thần",
-    url: "/",
+    url: "/ForDoctorsPage",
   },
   {
     id: "2",

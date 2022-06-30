@@ -99,12 +99,12 @@ export default function ForPatientsPage() {
 
             <div className='calender'>
                 <div className='title'>
-                <CalendarMonthIcon fontSize='small'/>
-                <p className='text'>LỊCH KHÁM</p>
+                  <CalendarMonthIcon fontSize='small'/>
+                  <p className='text'>LỊCH KHÁM</p>
                 </div>
 
                 <div className='booking'>
-                <Link className='btn-booking' to={''}>Đăng ký khám (Sáng)</Link>
+                  <Link className='btn-booking' to={''}>Đăng ký khám (Sáng)</Link>
                 </div>
 
                 <p className='txt'>Chọn  và đặt (Phí đặt lịch 0đ)</p>
