@@ -4,7 +4,7 @@ import React from "react";
 const FacilitiesPage = () => {
   return (
     <Box bgcolor="#F5F5F5">
-      <Box sx={{ px: 2, pt: 2 }}>
+      <Box sx={{ px: 2, pt: 2, mt: 1 }}>
         <Input
           disableUnderline={true}
           sx={{

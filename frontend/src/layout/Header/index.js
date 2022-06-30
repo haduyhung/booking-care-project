@@ -16,7 +16,11 @@ import { AiFillFacebook } from "react-icons/ai";
 import { FaYoutubeSquare } from "react-icons/fa";
 
 const pages = [
-  { name: "Chuyên khoa", explain: "Tìm bác sĩ chuyên khoa", url: "/" },
+  {
+    name: "Chuyên khoa",
+    explain: "Tìm bác sĩ chuyên khoa",
+    url: "/DepthsListPage",
+  },
   {
     name: "Cơ sở y tế",
     explain: "Chọn bệnh viện phòng khám",
