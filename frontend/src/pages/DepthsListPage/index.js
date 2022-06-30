@@ -1,7 +1,7 @@
 import { Box, List, ListItem, ListItemText, Link } from "@mui/material";
 import React from "react";
 
-const ExaminationPackagesPage = () => {
+const DepthsListPage = () => {
   return (
     <Box bgcolor="#F5F5F5">
       <Box bgcolor="#FFFFFF" sx={{ mt: 1, width: "100%" }}>
@@ -15,9 +15,9 @@ const ExaminationPackagesPage = () => {
             maxHeight: "650px",
           }}
         >
-          {examinationPackages.map((packages) => (
+          {depthsList.map((depth) => (
             <ListItem
-              key={packages.id}
+              key={depth.id}
               sx={{
                 pt: 2,
                 pb: 1,
@@ -32,16 +32,16 @@ const ExaminationPackagesPage = () => {
               }}
               component="Box"
             >
-              <Link href={packages.url}>
+              <Link href={depth.url}>
                 <img
-                  src={packages.imageURL}
-                  alt={packages.name}
+                  src={depth.imageURL}
+                  alt={depth.name}
                   width={100}
                   height={50}
                 />
               </Link>
               <Link
-                href={packages.url}
+                href={depth.url}
                 underline="none"
                 color="#333333"
                 sx={{
@@ -50,7 +50,7 @@ const ExaminationPackagesPage = () => {
                   mx: 1.5,
                 }}
               >
-                <ListItemText>{packages.name}</ListItemText>
+                <ListItemText>{depth.name}</ListItemText>
               </Link>
             </ListItem>
           ))}
@@ -60,64 +60,76 @@ const ExaminationPackagesPage = () => {
   );
 };
 
-const examinationPackages = [
+const depthsList = [
   {
     id: "1",
-    name: "Cơ bản",
+    name: "Cơ xương khớp",
     imageURL:
-      "https://cdn.bookingcare.vn/fr/w200/2018/06/12/113345goi-kham-co-b.jpg",
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120331-co-xuong-khop.jpg",
     url: "/",
   },
   {
     id: "2",
-    name: "Nâng cao",
+    name: "Thần kinh",
     imageURL:
-      "https://cdn.bookingcare.vn/fr/w200/2018/06/12/113606goi-kham-nang-cao.jpg",
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121042-than-kinh.jpg",
     url: "/",
   },
   {
     id: "3",
-    name: "Nam",
-    imageURL: "https://cdn.bookingcare.vn/fr/w200/2018/05/21/155354men.jpg",
+    name: "Tiêu Hoá",
+    imageURL:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120933-tieu-hoa.jpg",
     url: "/",
   },
   {
     id: "4",
-    name: "Nữ",
-    imageURL: "https://cdn.bookingcare.vn/fr/w200/2018/05/21/155338woman.jpg",
+    name: "Tim Mạch",
+    imageURL:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/120741-tim-mach.jpg",
     url: "/",
   },
   {
     id: "5",
-    name: "Trẻ em",
-    imageURL: "https://cdn.bookingcare.vn/fr/w200/2018/05/21/155249baby.jpg",
+    name: "Tai Mũi Họng",
+    imageURL:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121146-tai-mui-hong.jpg",
     url: "/",
   },
   {
     id: "6",
-    name: "Người già",
-    imageURL: "https://cdn.bookingcare.vn/fr/w200/2018/05/21/155222old.jpg",
+    name: "Cột sống",
+    imageURL:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121215-cot-song.jpg",
     url: "/",
   },
   {
     id: "7",
-    name: "Tiền hôn nhân",
-    imageURL: "https://cdn.bookingcare.vn/fr/w200/2018/05/21/155207love.jpg",
+    name: "Y học cổ truyền",
+    imageURL:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121232-y-hoc-co-truyen.jpg",
     url: "/",
   },
   {
     id: "8",
-    name: "Tầm soát ung thư",
+    name: "Châm cứu",
     imageURL:
-      "https://cdn.bookingcare.vn/fr/w200/2018/06/12/115138tam-soat-ung-thu.jpg",
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/13/121305-cham-cuu.jpg",
     url: "/",
   },
   {
     id: "9",
-    name: "Tầm soát ung thư vú",
+    name: "Sản phụ khoa",
     imageURL:
-      "https://cdn.bookingcare.vn/fr/w200/2018/06/12/104851ung-thu-v.jpg",
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/16/181822-san-phu-khoa.jpg",
+    url: "/",
+  },
+  {
+    id: "10",
+    name: "Siêu âm thai",
+    imageURL:
+      "https://cdn.bookingcare.vn/fr/w300/2019/12/16/181619-sieu-am-thai.jpg",
     url: "/",
   },
 ];
-export default ExaminationPackagesPage;
+export default DepthsListPage;
