@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Admin from "../admin";
 import Layout from "../layout/DefaultLayout/index";
 import DoctorsListPage from "../pages/DoctorsListPage";
 import ExaminationPackagesPage from "../pages/ExaminationPackagesPage";
@@ -22,6 +23,7 @@ const Router = () => {
             element={<ExaminationPackagesPage />}
           />
           <Route path="ForDoctorsPage" element={<ForDoctorsPage />} />
+          <Route path="Admin" element={<Admin />} />
           <Route path="ForPatientsPage" element={<ForPatientsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
