@@ -1,19 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import {
   Box,
+  Button,
   Container,
   Divider,
   IconButton,
   Link,
+  Stack,
   SwipeableDrawer,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import * as images from "../../assets/index";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsQuestionCircleFill } from "react-icons/bs";
 import { AiFillFacebook } from "react-icons/ai";
 import { FaYoutubeSquare } from "react-icons/fa";
+import LogoutIcons from "@mui/icons-material/Logout";
+import Login from "../Login";
+import Register from "../Register";
 
 const pages = [
   { name: "Chuyên khoa", explain: "Tìm bác sĩ chuyên khoa", url: "/" },
@@ -48,6 +54,19 @@ const aboutPages = [
 
 const Header = () => {
   const [drawer, setDrawer] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [registerModal, setRegisterModal] = useState(false);
+  const [token, setToken] = useState();
+  const [name, setName] = useState("");
+  const [reset, setReset] = useState(0);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const userName = localStorage.getItem("userName");
+    setToken(token);
+    setName(userName);
+  }, [reset]);
+
   return (
     <>
       <SwipeableDrawer
@@ -161,22 +180,61 @@ const Header = () => {
               </Box>
             </Box>
 
-            <Link
-              textAlign="right"
-              href="/"
-              underline="none"
-              color="#999999"
-              fontSize={14}
-              fontWeight="600"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                flexGrow: 0,
-              }}
-            >
-              <BsQuestionCircleFill color="#45C8DF" />
-              Hỗ trợ
-            </Link>
+            <Stack alignItems="center" spacing={1}>
+              <Link
+                textAlign="right"
+                href="/"
+                underline="none"
+                color="#999999"
+                fontSize={14}
+                fontWeight="600"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexGrow: 0,
+                }}
+              >
+                <BsQuestionCircleFill color="#45C8DF" />
+                Hỗ trợ
+              </Link>
+              {!!token ? (
+                <Stack alignItems="center" direction="row" spacing={1}>
+                  <Typography>Hi: {name}</Typography>
+                  <LogoutIcons
+                    onClick={() => {
+                      localStorage.clear();
+                      setToken();
+                      setReset(reset + 1);
+                    }}
+                  />
+                </Stack>
+              ) : (
+                <Stack direction="row" spacing={1}>
+                  <Button
+                    size="small"
+                    onClick={() => setLoginModal(true)}
+                    variant="contained"
+                  >
+                    sign in
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => setRegisterModal(true)}
+                    variant="contained"
+                  >
+                    sign up
+                  </Button>
+                </Stack>
+              )}
+            </Stack>
+            <Login
+              reset={reset}
+              modal={loginModal}
+              setModal={setLoginModal}
+              setRegisterModal={setRegisterModal}
+              setReset={setReset}
+            />
+            <Register modal={registerModal} setModal={setRegisterModal} />
           </Toolbar>
         </Container>
       </AppBar>

@@ -23,7 +23,7 @@ const Router = () => {
             element={<ExaminationPackagesPage />}
           />
           <Route path="ForDoctorsPage" element={<ForDoctorsPage />} />
-          <Route path="Admin" element={<Admin />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="ForPatientsPage" element={<ForPatientsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
