@@ -40,6 +40,7 @@ const drawerPages = [
   { name: "Trang chủ", url: "/" },
   { name: "Cẩm nang", url: "/" },
   { name: "Liên kết hợp tác", url: "/" },
+  { name: "Admin", url: "/Admin" },
 ];
 const aboutPages = [
   { name: "Dành cho bệnh nhân", url: "/ForPatientsPage" },
