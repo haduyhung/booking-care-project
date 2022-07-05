@@ -12,9 +12,9 @@ function Register({ modal, setModal }) {
 
   const handleClose = () => setModal(false);
 
-  const GetRegister = async () => {
+  const GetRegister = () => {
     try {
-      const response = await RegisterApi.addNewUser({
+      RegisterApi.addNewUser({
         email,
         firstName,
         middleName,

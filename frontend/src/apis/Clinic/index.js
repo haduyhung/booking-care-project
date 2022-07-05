@@ -1,34 +1,34 @@
-import requestClient from "./requestClient";
+import requestClient from "../RequestClient";
 
 const ClinicApi = {
-  getAll(token) {
+  getAll() {
     const urlParam = "clinic";
 
     return requestClient.get(urlParam);
   },
 
-  getOne(id, token) {
+  getOne(id) {
     const urlParam = `clinic/${id}`;
 
     return requestClient.get(urlParam);
   },
 
-  addNewClinic(data) {
+  addNewClinic(data, token) {
     const urlParam = `clinic`;
 
-    return requestClient.post(urlParam, data);
+    return requestClient.post(urlParam, data, token);
   },
 
-  deleteClinic(id, user) {
+  deleteClinic(id, token) {
     const urlParam = `clinic/${id}`;
 
-    return requestClient.delete(urlParam);
+    return requestClient.delete(urlParam, token);
   },
 
-  updateClinic(id, data, user) {
+  updateClinic(id, data, token) {
     const urlParam = `clinic/${id}`;
 
-    return requestClient.put(urlParam, data);
+    return requestClient.put(urlParam, data, token);
   },
 
   getOneInfo(id, token) {

@@ -14,86 +14,73 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import UserApi from "../../../apis/UserApi";
-import RegisterApi from "../../../apis/Register";
+import ClinicApi from "../../../apis/Clinic";
 
-export default function Users() {
-  const [users, setUsers] = useState();
+export default function Clinic() {
+  const [clinics, setClinics] = useState();
   const [changeId, setChangeId] = useState();
   const [modal, setModal] = useState(false);
   const [email, setEmail] = useState();
-  const [firstName, setFirstName] = useState();
-  const [middleName, setMiddleName] = useState();
-  const [lastName, setLastName] = useState();
-  const [gender, setGender] = useState();
-  const [role, setRole] = useState();
-  const [birthday, setBirthday] = useState();
+  const [name, setName] = useState();
   const [address, setAddress] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [clinicId, setClinicId] = useState();
-  const [specialtyId, setSpecialtyId] = useState();
+  const [phone, setPhone] = useState();
+  const [specialties, setSpecialties] = useState();
 
   const handleClose = () => setModal(false);
 
-  const GetUser = useCallback(async () => {
+  const getClinic = useCallback(async () => {
     try {
-      const response = await UserApi.getAll();
-      setUsers(response.data.data);
+      const response = await ClinicApi.getAll();
+      setClinics(response.data.data);
     } catch (error) {
       console.error(error.response);
     }
   }, []);
 
   useEffect(() => {
-    GetUser();
-  }, [GetUser]);
+    getClinic();
+  }, [getClinic]);
 
   const handleDelete = (id) => {
-    UserApi.deleteUser(id);
+    ClinicApi.deleteClinic(id);
 
     setTimeout(() => {
-      GetUser();
+      getClinic();
     }, 500);
   };
 
   return (
-    <Stack>
+    <>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Full Name</TableCell>
-              <TableCell align="left">Gender</TableCell>
-              <TableCell align="left">Role</TableCell>
-              <TableCell align="left">Birthday</TableCell>
+              <TableCell align="left">ID</TableCell>
+              <TableCell align="left">Name</TableCell>
               <TableCell align="left">Address</TableCell>
-              <TableCell align="left">Phone Number</TableCell>
-              {/* <TableCell align="left">ClinicId</TableCell>
-              <TableCell align="left">SpecialtyId</TableCell> */}
+              <TableCell align="left">Phone</TableCell>
+              <TableCell align="left">Email</TableCell>
               <TableCell align="left">Edit</TableCell>
               <TableCell align="left">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {users?.map((user) => (
+            {clinics?.map((clinic) => (
               <TableRow
-                key={user.id}
+                key={clinic.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="left" component="th">
-                  {user.email}
+                  {clinic.id}
                 </TableCell>
-                <TableCell align="left">
-                  {user.firstName} {user.middleName} {user.lastName}
+                <TableCell align="left" component="th">
+                  {clinic.name}
                 </TableCell>
-                <TableCell align="left">{user.gender}</TableCell>
-                <TableCell align="left">{user.role}</TableCell>
-                <TableCell align="left">{user.birthday}</TableCell>
-                <TableCell align="left">{user.address}</TableCell>
-                <TableCell align="left">{user.phoneNumber}</TableCell>
-                {/* <TableCell align="left">{user.clinicId}</TableCell>
-                <TableCell align="left">{user.specialtyId}</TableCell> */}
+                <TableCell align="left" component="th">
+                  {clinic.address}
+                </TableCell>
+                <TableCell align="left">{clinic.phone}</TableCell>
+                <TableCell align="left">{clinic.email}</TableCell>
                 <TableCell align="left">
                   <Stack
                     sx={{
@@ -109,7 +96,7 @@ export default function Users() {
                     alignItems="center"
                     onClick={() => {
                       setModal(true);
-                      setChangeId(user.id);
+                      setChangeId(clinic.id);
                     }}
                   >
                     <Edit sx={{ color: "white" }} />
@@ -128,7 +115,7 @@ export default function Users() {
                     }}
                     justifyContent="center"
                     alignItems="center"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => handleDelete(clinic.id)}
                   >
                     <DeleteForever sx={{ color: "white" }} />
                   </Stack>
@@ -167,48 +154,9 @@ export default function Users() {
           <Stack width="80%" py={2} spacing={2}>
             <TextField
               flex={1}
-              label="Email"
-              type="email"
+              label="Name"
               variant="outlined"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Stack direction="row" spacing={2}>
-              <TextField
-                flex={1}
-                label="First Name"
-                variant="outlined"
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <TextField
-                flex={1}
-                label="Middle Name"
-                variant="outlined"
-                onChange={(e) => setMiddleName(e.target.value)}
-              />
-              <TextField
-                flex={1}
-                label="Last Name"
-                variant="outlined"
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </Stack>
-            <TextField
-              flex={1}
-              label="Gender"
-              variant="outlined"
-              onChange={(e) => setGender(e.target.value)}
-            />
-            <TextField
-              flex={1}
-              label="Role"
-              variant="outlined"
-              onChange={(e) => setRole(e.target.value)}
-            />
-            <TextField
-              flex={1}
-              label="Birthday"
-              variant="outlined"
-              onChange={(e) => setBirthday(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
             <TextField
               flex={1}
@@ -218,48 +166,42 @@ export default function Users() {
             />
             <TextField
               flex={1}
-              label="PhoneNumbe"
+              label="Role"
               variant="outlined"
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <TextField
               flex={1}
-              label="Clinic Id"
+              label="Email"
               variant="outlined"
-              onChange={(e) => setClinicId(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               flex={1}
-              label="Specialty Id"
+              label="Specialties"
               variant="outlined"
-              onChange={(e) => setSpecialtyId(e.target.value)}
+              onChange={(e) => setSpecialties(e.target.value)}
             />
 
             <Button
               variant="contained"
               onClick={() => {
-                UserApi.update(changeId, {
-                  email,
-                  firstName,
-                  middleName,
-                  lastName,
-                  gender,
-                  role,
-                  birthday,
+                ClinicApi.updateClinic(changeId, {
+                  name,
                   address,
-                  phoneNumber,
-                  clinicId,
-                  specialtyId,
+                  phone,
+                  email,
+                  specialties,
                 });
-                GetUser();
+                getClinic();
                 setModal(false);
               }}
             >
-              Update User
+              Update Clinic
             </Button>
           </Stack>
         </Stack>
       </Modal>
-    </Stack>
+    </>
   );
 }
