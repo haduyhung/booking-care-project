@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Admin from "../admin";
 import Layout from "../layout/DefaultLayout/index";
+import DepthsListPage from "../pages/DepthsListPage";
 import DoctorsListPage from "../pages/DoctorsListPage";
 import ExaminationPackagesPage from "../pages/ExaminationPackagesPage";
 import FacilitiesPage from "../pages/FacilitiesPage/FacilitiesPage";
@@ -15,6 +17,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="DepthsListPage" element={<DepthsListPage />} />
           <Route path="FacilitiesPage" element={<FacilitiesPage />} />
           <Route path="DoctorsListPage" element={<DoctorsListPage />} />
           <Route
@@ -22,6 +25,7 @@ const Router = () => {
             element={<ExaminationPackagesPage />}
           />
           <Route path="ForDoctorsPage" element={<ForDoctorsPage />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="ForPatientsPage" element={<ForPatientsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
