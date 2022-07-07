@@ -5,7 +5,7 @@ import Layout from "../layout/DefaultLayout/index";
 import DepthsListPage from "../pages/DepthsListPage";
 import DoctorsListPage from "../pages/DoctorsListPage";
 import ExaminationPackagesPage from "../pages/ExaminationPackagesPage";
-import FacilitiesPage from "../pages/FacilitiesPage/FacilitiesPage";
+import FacilitiesPage from "../pages/FacilitiesPage/index";
 import ForDoctorsPage from "../pages/ForDoctorPage/index";
 import ForPatientsPage from "../pages/ForPatientsPage/index";
 import Home from "../pages/Home/index";

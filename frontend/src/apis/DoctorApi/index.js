@@ -1,7 +1,7 @@
-import requestClient from "./requestClient";
+import requestClient from "../RequestClient/index";
 
 const DoctorApi = {
-  getAll(token) {
+  getAllDoctors() {
     const urlParam = "doctor";
 
     return requestClient.get(urlParam);

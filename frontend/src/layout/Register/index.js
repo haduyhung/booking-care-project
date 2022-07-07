@@ -14,7 +14,7 @@ function Register({ modal, setModal }) {
 
   const GetRegister = async () => {
     try {
-      const response = await RegisterApi.addNewUser({
+      await RegisterApi.addNewUser({
         email,
         firstName,
         middleName,
