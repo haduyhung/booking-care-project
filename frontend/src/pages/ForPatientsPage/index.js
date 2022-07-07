@@ -65,10 +65,10 @@ export default function ForPatientsPage() {
               <div className='information'>
                 <p className='name'>Giáo sư, Tiến sĩ, Bác sĩ Trần Ngọc Ân</p>
                 <p className='detail'>
-                Nguyên Trưởng khoa Cơ xương khớp, Bệnh viện Bạch Mai<br/>
-                Chủ tịch Hội Thấp khớp học Việt Nam<br/>
-                Giáo sư đầu ngành với gần 50 năm kinh nghiệm điều trị các bệnh lý liên quan đến Cơ xương khớp<br/>
-                Bác sĩ khám cho người bệnh từ 14 tuổi trở lên<br/>
+                  Nguyên Trưởng khoa Cơ xương khớp, Bệnh viện Bạch Mai<br/>
+                  Chủ tịch Hội Thấp khớp học Việt Nam<br/>
+                  Giáo sư đầu ngành với gần 50 năm kinh nghiệm điều trị các bệnh lý liên quan đến Cơ xương khớp<br/>
+                  Bác sĩ khám cho người bệnh từ 14 tuổi trở lên<br/>
                 </p>
                 <p className='address'>
                 <div className="icons">
@@ -113,8 +113,8 @@ export default function ForPatientsPage() {
             <div className='booking-address'>
                 <p className='title'>ĐỊA CHỈ KHÁM</p>
                 <p className='content'>
-                Bệnh viện Đa khoa Quốc tế Thu Cúc - Thụy Khuê <br/>
-                286 Thụy Khuê, quận Tây Hồ, Hà Nội
+                  Bệnh viện Đa khoa Quốc tế Thu Cúc - Thụy Khuê <br/>
+                  286 Thụy Khuê, quận Tây Hồ, Hà Nội
                 </p>
             </div>
 
