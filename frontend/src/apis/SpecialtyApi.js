@@ -23,7 +23,7 @@ const SpecialtyApi = {
     return requestClient.delete(urlParam, token);
   },
 
-  update(id, data, token) {
+  updateSpecialty(id, data, token) {
     const urlParam = `specialty/${id}`;
 
     return requestClient.put(urlParam, data, token);
