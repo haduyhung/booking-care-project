@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BookingWrapper } from './styled';
 import Container from "@mui/material/Container";
 import InputLabel from '@mui/material/InputLabel';
@@ -8,8 +8,9 @@ import Select from '@mui/material/Select';
 import Avatar from '@mui/material/Avatar';
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Link } from "@mui/material";
 
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import * as images from '../../assets';
 
@@ -17,9 +18,43 @@ import SpecialistFrom from '../../components/atoms/SpecialistForm';
 import ShowPriceList from '../../components/atoms/ShowForm/ShowPriceList';
 import ShowInsurance from '../../components/atoms/ShowForm/ShowInsurance';
 
+import SpecialtyApi from '../../apis/SpecialtyApi';
+
+import DoctorApi from '../../apis/DoctorApi';
+
 export default function ForPatientsPage() {
+  let {id} = useParams();
   const [location, setLocation] = React.useState('');
   const [date, setDate] = React.useState('');
+
+  console.log('1', id);
+
+  const [detailSpecs, setDetailSpecs] = useState();
+  const [doctors, setDoctors] = useState();
+
+  const getSpecialty = useCallback(async () => {
+    try {
+      const response = await SpecialtyApi.getOne(id);
+      setDetailSpecs(response.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }, [id]);
+
+  const getDoctor = useCallback(async () => {
+    try {
+      const response = await DoctorApi.getAll({specialtyId: id});
+      setDoctors(response.data.data);
+      console.log('rs', response.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    getSpecialty();
+    getDoctor();
+  }, [getSpecialty, getDoctor]);
 
   const handleChangeLocation = (event) => {
       setLocation(event.target.value);
@@ -31,7 +66,7 @@ export default function ForPatientsPage() {
 
   return ( <BookingWrapper>
     <div>
-      <SpecialistFrom />
+      <SpecialistFrom detail={detailSpecs}/>
 
       <div className='content'>
         <Container>
@@ -50,8 +85,8 @@ export default function ForPatientsPage() {
             <MenuItem value={30}>Hồ Chí Minh</MenuItem>
             </Select>
           </FormControl>
-
-          <div className='wrapper'>
+        {doctors?.map((doctor) => (
+          <div className='wrapper' key={doctor.id}>
             <div className='wp-left'>
               <div className='img'>
                 <Avatar
@@ -61,21 +96,20 @@ export default function ForPatientsPage() {
                 />
                 <Link className='link' to={''}>Xem thêm</Link>
               </div>
-
-              <div className='information'>
-                <p className='name'>Giáo sư, Tiến sĩ, Bác sĩ Trần Ngọc Ân</p>
+                <div className='information'>
+                <p className='name'>Giáo sư, Tiến sĩ, Bác sĩ {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
                 <p className='detail'>
                   Nguyên Trưởng khoa Cơ xương khớp, Bệnh viện Bạch Mai<br/>
                   Chủ tịch Hội Thấp khớp học Việt Nam<br/>
                   Giáo sư đầu ngành với gần 50 năm kinh nghiệm điều trị các bệnh lý liên quan đến Cơ xương khớp<br/>
                   Bác sĩ khám cho người bệnh từ 14 tuổi trở lên<br/>
                 </p>
-                <p className='address'>
-                <div className="icons">
-                    <LocationOnIcon fontSize="small" />
+                <div className='address'>
+                  <div className="icons">
+                      <LocationOnIcon fontSize="small" />
+                  </div>
+                    Hà nội
                 </div>
-                Hà nội
-                </p>
               </div>
           </div>
 
@@ -113,16 +147,16 @@ export default function ForPatientsPage() {
             <div className='booking-address'>
                 <p className='title'>ĐỊA CHỈ KHÁM</p>
                 <p className='content'>
-                  Bệnh viện Đa khoa Quốc tế Thu Cúc - Thụy Khuê <br/>
-                  286 Thụy Khuê, quận Tây Hồ, Hà Nội
+                  {doctor.address}
                 </p>
             </div>
 
-            <ShowPriceList />
+            <ShowPriceList detail={doctor}/>
 
             <ShowInsurance />
             </div>
           </div>
+        ))}
         </Container>
       </div>
     </div>

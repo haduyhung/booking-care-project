@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import Box from '@mui/material/Box';
 import Portal from '@mui/material/Portal';
 
-function SpecialistFrom() {
+function SpecialistFrom({detail}) {
     const [show, setShow] = React.useState(false);
     const container = React.useRef(null);
 
@@ -14,9 +14,10 @@ function SpecialistFrom() {
         <div className='introduce'>
         <Container className='container'>
         <Box>
-            <p className='specialist-name'>Cơ Xương Khớp</p>
-            <p>Bác sĩ Cơ Xương Khớp giỏi</p>
-            <p>Danh sách các bác sĩ uy tín đầu ngành Cơ Xương Khớp tại Việt Nam:</p>
+            <p className='specialist-name'>{detail?.name}</p>
+            <p>{detail?.description}</p>
+        </Box>
+            {/* <p>Danh sách các bác sĩ uy tín đầu ngành Cơ Xương Khớp tại Việt Nam:</p>
             {show ? (
                 <Portal container={container.current}>
                 <ul>
@@ -41,7 +42,7 @@ function SpecialistFrom() {
             <Box ref={container} />
         <button className='btn-more' type="button" onClick={handleClick}>
             {show ? 'Ẩn bớt' : 'Đọc thêm'}
-        </button>
+        </button> */}
         </Container>
     </div>
     )

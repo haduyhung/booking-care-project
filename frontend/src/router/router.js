@@ -18,6 +18,7 @@ const Router = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="DepthsListPage" element={<DepthsListPage />} />
+          <Route path="ForPatientsPage/:id" element={<ForPatientsPage />} />
           <Route path="FacilitiesPage" element={<FacilitiesPage />} />
           <Route path="DoctorsListPage" element={<DoctorsListPage />} />
           <Route
@@ -26,7 +27,6 @@ const Router = () => {
           />
           <Route path="ForDoctorsPage" element={<ForDoctorsPage />} />
           <Route path="admin" element={<Admin />} />
-          <Route path="ForPatientsPage" element={<ForPatientsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
