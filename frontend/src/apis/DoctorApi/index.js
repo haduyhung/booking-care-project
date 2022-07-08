@@ -1,4 +1,4 @@
-import requestClient from "./requestClient";
+import requestClient from "../RequestClient";
 
 const DoctorApi = {
   getAll(token) {

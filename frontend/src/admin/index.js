@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Stack } from "@mui/material";
 import Users from "./components/users";
-import Auth from "./components/auth";
+import Doctor from "./components/Doctor";
 import Clinic from "./components/Clinic";
 import Specialty from "./components/Specialty";
 
@@ -30,15 +30,15 @@ function Admin() {
         >
           Users
         </Button>
-        {/* <Button
-          variant={showedTable === "auth" ? "contained" : "outlined"}
+        <Button
+          variant={showedTable === "doctor" ? "contained" : "outlined"}
           onClick={() => {
-            setTable(<Auth />);
-            setShowedTable("auth");
+            setTable(<Doctor />);
+            setShowedTable("doctor");
           }}
         >
-          Auth
-        </Button> */}
+          Doctor
+        </Button>
         <Button
           variant={showedTable === "clinic" ? "contained" : "outlined"}
           onClick={() => {
