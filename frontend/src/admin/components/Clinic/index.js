@@ -13,7 +13,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import ClinicApi from "../../../apis/Clinic";
+import ClinicApi from "../../../apis/ClinicApi";
 
 export default function Clinic() {
   const [clinics, setClinics] = useState();

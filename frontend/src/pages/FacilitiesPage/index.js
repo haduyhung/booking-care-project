@@ -8,18 +8,18 @@ import {
   CircularProgress,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import DoctorApi from "../../apis/DoctorApi";
+import ClinicApi from "../../apis/ClinicApi";
 import * as image from "../../assets/index";
 
-const DoctorsListPage = () => {
-  const [doctors, setDoctors] = useState([]);
+const FacilitiesPage = () => {
+  const [clinics, setClinic] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const callGetAllDoctors = async () => {
+  const callGetAllClinics = async () => {
     setLoading(true);
     try {
-      const data = await DoctorApi.getAllDoctors();
-      setDoctors(data.data?.data);
+      const data = await ClinicApi.getAllClinics();
+      setClinic(data.data?.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -27,7 +27,7 @@ const DoctorsListPage = () => {
     }
   };
   useEffect(() => {
-    callGetAllDoctors();
+    callGetAllClinics();
   }, []);
 
   return (
@@ -43,7 +43,7 @@ const DoctorsListPage = () => {
             px: 2,
             bgcolor: "white",
           }}
-          placeholder="Tìm kiếm bác sĩ"
+          placeholder="Tìm kiếm bệnh viện, phòng khám"
         />
       </Box>
       <Box bgcolor="#FFFFFF" sx={{ mt: 1, width: "100%", minHeight: "100px" }}>
@@ -57,9 +57,6 @@ const DoctorsListPage = () => {
             maxHeight: "580px",
           }}
         >
-          <Box sx={{ fontWeight: "600", fontSize: "15px", px: 2, pt: 1 }}>
-            Bác sĩ nổi bật
-          </Box>
           {loading && (
             <Box
               sx={{
@@ -67,14 +64,18 @@ const DoctorsListPage = () => {
                 display: "flex",
                 justifyContent: "center",
                 position: "fixed",
+                pt: 2,
               }}
             >
               <CircularProgress />
             </Box>
           )}
-          {doctors.map((doctor) => (
+          <Box sx={{ fontWeight: "600", fontSize: "15px", px: 2, pt: 1 }}>
+            Bệnh viện, phòng khám nổi bật
+          </Box>
+          {clinics.map((clinic) => (
             <ListItem
-              key={doctor.id}
+              key={clinic.id}
               sx={{
                 pt: 2,
                 pb: 1,
@@ -86,64 +87,35 @@ const DoctorsListPage = () => {
               }}
               component="div"
             >
-              <Link href={doctor.url}>
-                {!doctor.image ? (
+              <Link href="/">
+                {!clinic.image ? (
                   <img
                     src={image.DepthsDefault}
-                    alt={doctor.lastName}
-                    width={50}
+                    alt={clinic.name}
+                    width={100}
                     height={50}
-                    style={{ borderRadius: "50px" }}
                   />
                 ) : (
                   <img
-                    src={doctor.avatar}
-                    alt={doctor.lastName}
-                    width={50}
+                    src={clinic.image}
+                    alt={clinic.name}
+                    width={100}
                     height={50}
-                    style={{ borderRadius: "50px" }}
                   />
                 )}
               </Link>
-              <Box
+              <Link
+                href="/"
+                underline="none"
+                color="#333333"
                 sx={{
                   display: "flex",
-                  flexDirection: "column",
+                  alignSelf: "flex-start",
+                  mx: 1.5,
                 }}
               >
-                <Link
-                  href="/"
-                  underline="none"
-                  color="#333333"
-                  sx={{
-                    display: "flex",
-                    mx: 1.5,
-                    mt: -1,
-                  }}
-                >
-                  <ListItemText>
-                    {doctor.lastName}
-                    {doctor.middleName}
-                    {doctor.firstName}
-                  </ListItemText>
-                </Link>
-                <Link
-                  href="/"
-                  underline="none"
-                  color="#999999"
-                  sx={{
-                    display: "flex",
-                    alignSelf: "flex-start",
-                    mx: 1.5,
-                    fontSize: "10px",
-                    mt: -1,
-                  }}
-                >
-                  <ListItemText sx={{ fontSize: 5 }}>
-                    {doctor.specialty.name}
-                  </ListItemText>
-                </Link>
-              </Box>
+                <ListItemText>{clinic.name}</ListItemText>
+              </Link>
             </ListItem>
           ))}
         </List>
@@ -152,4 +124,4 @@ const DoctorsListPage = () => {
   );
 };
 
-export default DoctorsListPage;
+export default FacilitiesPage;
