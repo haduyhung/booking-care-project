@@ -58,7 +58,7 @@ const ForDoctorsPage = () => {
     } catch (error) {
       console.error(error.response);
     }
-  }, [date]);
+  }, [date, id]);
 
   useEffect(() => {
     getDoctorSchedules();
@@ -160,7 +160,7 @@ const ForDoctorsPage = () => {
               </Typography>
             </Box>
             <Box sx={{ display: "flex", py: 1 }}>
-              {/* {doctorSchedules?.map((schedule) => (
+              {doctorSchedules?.map((schedule) => (
                 <Button
                   sx={{
                     px: 2.5,
@@ -178,7 +178,7 @@ const ForDoctorsPage = () => {
                     {moment(schedule.timeStart).format("LT")}
                   </Typography>
                 </Button>
-              ))} */}
+              ))}
             </Box>
             <Typography sx={{ fontSize: 13 }}>
               Chọn và đặt (Phí đặt lịch 0đ)

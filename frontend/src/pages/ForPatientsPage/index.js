@@ -28,7 +28,7 @@ export default function ForPatientsPage() {
   let {id} = useParams();
   let navigate = useNavigate();
   const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
+  // const [date, setDate] = useState('');
 
   const [detailSpecs, setDetailSpecs] = useState();
   const [doctors, setDoctors] = useState();
@@ -64,9 +64,9 @@ export default function ForPatientsPage() {
       setLocation(event.target.value);
   };
 
-  const handleChangeDate = (event) => {
-      setDate(event.target.value);
-  };
+  // const handleChangeDate = (event) => {
+  //     setDate(event.target.value);
+  // };
 
   return ( <BookingWrapper>
     <div>
@@ -113,12 +113,12 @@ export default function ForPatientsPage() {
                 </Link>
               </div>
                 <div className='information'>
-                <p className='name'>Giáo sư, Tiến sĩ, Bác sĩ {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
+                <p className='name'>{doctor?.doctorInfor?.introduct} {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
                 <p className='detail'>
-                  Nguyên Trưởng khoa Cơ xương khớp, Bệnh viện Bạch Mai<br/>
-                  Chủ tịch Hội Thấp khớp học Việt Nam<br/>
-                  Giáo sư đầu ngành với gần 50 năm kinh nghiệm điều trị các bệnh lý liên quan đến Cơ xương khớp<br/>
-                  Bác sĩ khám cho người bệnh từ 14 tuổi trở lên<br/>
+                  {doctor?.doctorInfor?.description}
+                </p>
+                <p className='detail'>
+                  {doctor?.doctorInfor?.note}
                 </p>
                 <div className='address'>
                   <div className="icons">
@@ -130,7 +130,7 @@ export default function ForPatientsPage() {
           </div>
 
           <div className='wp-right'>
-            <FormControl variant="standard" sx={{ width: 120 }}>
+            {/* <FormControl variant="standard" sx={{ width: 120 }}>
                 <InputLabel id="demo-simple-select-standard-label">Date</InputLabel>
                 <Select
                 labelId="demo-simple-select-standard-label"
@@ -145,7 +145,7 @@ export default function ForPatientsPage() {
                 <MenuItem value={20}>Thứ 7: 28/05</MenuItem>
                 <MenuItem value={30}>Thứ 2: 30/05</MenuItem>
                 </Select>
-            </FormControl>
+            </FormControl> */}
 
             <div className='calender'>
                 <div className='title'>
@@ -154,7 +154,7 @@ export default function ForPatientsPage() {
                 </div>
 
                 <div className='booking'>
-                  <Link className='btn-booking' to={''}>Đăng ký khám (Sáng)</Link>
+                  <Link className='btn-booking' onClick={() => handleToDetail(doctor)}>Đăng ký khám</Link>
                 </div>
 
                 <p className='txt'>Chọn  và đặt (Phí đặt lịch 0đ)</p>
