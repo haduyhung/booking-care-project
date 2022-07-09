@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const token = "";
+const token = localStorage.getItem("accessToken");
 const requestClient = axios.create({
   baseURL: "http://14.225.255.59:8000/",
   headers: {

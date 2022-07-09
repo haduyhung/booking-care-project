@@ -1,32 +1,39 @@
-import requestClient from "./requestClient"
+import requestClient from "../RequestClient";
 
 const UserApi = {
-	getAll(token) {
-		const urlParam = "users"
+  getAll(token) {
+    const urlParam = "user";
 
-		return requestClient.get(urlParam)
-	},
-	getOne(id, token) {
-		const urlParam = `users/${id}`
+    return requestClient.get(urlParam, token);
+  },
+  getOne(id, token) {
+    const urlParam = `user/${id}`;
 
-		return requestClient.get(urlParam)
-	},
+    return requestClient.get(urlParam, token);
+  },
 
-	deleteUser(id, user) {
-		const urlParam = `users/${id}`
+  addNewUser(data, token) {
+    const urlParam = `user`;
 
-		return requestClient.delete(urlParam)
-	},
+    return requestClient.post(urlParam, data, token);
+  },
 
-	update(id, data, user) {
-		const urlParam = `users/${id}`
+  deleteUser(id, token) {
+    const urlParam = `user/${id}`;
 
-		return requestClient.put(urlParam, data)
-	},
-	registerOut(data) {
-		const urlParam = "users/register/out"
-		return requestClient.post(urlParam, data)
-	},
-}
+    return requestClient.delete(urlParam, token);
+  },
 
-export default UserApi
+  update(id, data, token) {
+    const urlParam = `user/${id}`;
+
+    return requestClient.put(urlParam, data, token);
+  },
+
+  registerOut(data) {
+    const urlParam = "users/register/out";
+    return requestClient.post(urlParam, data);
+  },
+};
+
+export default UserApi;
