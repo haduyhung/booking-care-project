@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ShowFormWrapper } from '../styled';
 
-function ShowPriceList() {
+function ShowPriceList({detail}) {
     const [showPL, setShowPL] = React.useState(false);
 
     const containerPL = React.useRef(null);
@@ -45,7 +45,7 @@ function ShowPriceList() {
                             <p className='subtitle-show'>Không áp dụng</p>
                         </TableCell>
                         <TableCell component="th" scope="row" sx={{padding: 1}}>
-                            <p className='price'>500.000đ</p>
+                            <p className='price'>{detail.price}</p>
                         </TableCell>
                         </TableRow>
                         <TableRow>
@@ -54,7 +54,7 @@ function ShowPriceList() {
                             <p className='subtitle-show'>Theo chỉ định của bác sĩ</p>
                         </TableCell>
                         <TableCell component="th" scope="row" sx={{padding: 1}}>
-                            <p className='price'>500.000đ</p>
+                            <p className='price'>{detail.price}</p>
                         </TableCell>
                         </TableRow>
                     </TableBody>

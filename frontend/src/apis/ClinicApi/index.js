@@ -1,7 +1,7 @@
 import requestClient from "../RequestClient";
 
 const ClinicApi = {
-  getAll() {
+  getAllClinics() {
     const urlParam = "clinic";
 
     return requestClient.get(urlParam);

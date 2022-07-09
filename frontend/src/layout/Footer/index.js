@@ -18,18 +18,18 @@ const Footer = () => {
               <img className="img-logo" src={images.Logo} alt="logo" />
               <div className="information">
                 <p className="name">Công ty Cổ phần Công nghệ BookingCare</p>
-                <p className="info">
+                <div className="info">
                   <div className="icons">
                     <LocationOnIcon fontSize="small" />
                   </div>
                   28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội
-                </p>
-                <p className="info">
+                </div>
+                <div className="info">
                   <div className="icons">
                     <DoneRoundedIcon fontSize="small" />
                   </div>
                   ĐKKD số: 0106790291. Sở KHĐT Hà Nội cấp ngày 16/03/2015
-                </p>
+                </div>
                 <img
                   className="img-logo-bo"
                   src={images.Bo_Cong_Thuong}
