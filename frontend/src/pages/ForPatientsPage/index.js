@@ -12,7 +12,7 @@ import { Link } from "@mui/material";
 
 import { useParams } from 'react-router-dom';
 
-import * as images from '../../assets';
+import baseURL from '../../utils';
 
 import SpecialistFrom from '../../components/atoms/SpecialistForm';
 import ShowPriceList from '../../components/atoms/ShowForm/ShowPriceList';
@@ -45,7 +45,6 @@ export default function ForPatientsPage() {
     try {
       const response = await DoctorApi.getAll({specialtyId: id});
       setDoctors(response.data.data);
-      console.log('rs', response.data);
     } catch (error) {
       console.error(error.response);
     }
@@ -90,8 +89,8 @@ export default function ForPatientsPage() {
             <div className='wp-left'>
               <div className='img'>
                 <Avatar
-                alt="Remy Sharp"
-                src={images.GS_Tran_Ngoc_An}
+                alt={doctor.id}
+                src={`${baseURL}${doctor.avatar}`}
                 sx={{ width: 100, height: 100, mb: 1}}
                 />
                 <Link className='link' to={''}>Xem thêm</Link>

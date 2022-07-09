@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SpecialtyApi from "../../apis/SpecialtyApi";
+import baseURL from "../../utils";
 
 const DepthsListPage = () => {
   let navigate = useNavigate();
@@ -23,7 +24,7 @@ const DepthsListPage = () => {
   }, [getSpecialty]);
 
   const handleToDetail = (depth) => {
-    navigate(`/ForPatientsPage/${depth.id}`, {data: depth});
+    navigate(`/ForPatientsPage/${depth.id}`);
   };
 
   return (
@@ -60,7 +61,7 @@ const DepthsListPage = () => {
                 onClick={() => handleToDetail(depth)}
               >
                 <img
-                  src={depth.image}
+                  src={`${baseURL}${depth.image}`}
                   alt={depth.name}
                   width={100}
                   height={50}
