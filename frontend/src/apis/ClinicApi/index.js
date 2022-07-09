@@ -1,4 +1,4 @@
-import requestClient from "../RequestClient/index";
+import requestClient from "../RequestClient";
 
 const ClinicApi = {
   getAllClinics() {
