@@ -6,8 +6,8 @@ import Clinic from "./components/Clinic";
 import Specialty from "./components/Specialty";
 
 function Admin() {
-  const [table, setTable] = useState();
-  const [showedTable, setShowedTable] = useState();
+  const [table, setTable] = useState(<Users />);
+  const [showedTable, setShowedTable] = useState("user");
 
   return (
     <Stack minHeight={600} p={5} bgcolor="#fbfbfb" direction="row" spacing={5}>

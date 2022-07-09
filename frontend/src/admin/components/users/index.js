@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { DeleteForever, Edit } from "@mui/icons-material";
+import moment from "moment";
 import {
   Table,
   TableBody,
@@ -9,16 +10,24 @@ import {
   TableRow,
   Paper,
   Stack,
+  MenuItem,
+  InputLabel,
   Modal,
-  Typography,
+  Select,
   TextField,
   Button,
 } from "@mui/material";
 import UserApi from "../../../apis/UserApi";
-import RegisterApi from "../../../apis/Register";
+import ClinicApi from "../../../apis/ClinicApi";
+import SpecialtyApi from "../../../apis/SpecialtyApi";
 
 export default function Users() {
+  //api
   const [users, setUsers] = useState();
+  const [clinics, setClinics] = useState();
+  const [specialties, setSpecialties] = useState();
+
+  //data change
   const [changeId, setChangeId] = useState();
   const [modal, setModal] = useState(false);
   const [email, setEmail] = useState();
@@ -27,11 +36,13 @@ export default function Users() {
   const [lastName, setLastName] = useState();
   const [gender, setGender] = useState();
   const [role, setRole] = useState();
-  const [birthday, setBirthday] = useState();
+  const [year, setYear] = useState();
+  const [month, setMonth] = useState();
+  const [day, setDay] = useState();
   const [address, setAddress] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
-  const [clinicId, setClinicId] = useState();
-  const [specialtyId, setSpecialtyId] = useState();
+  const [clinicId, setClinicId] = useState("");
+  const [specialtyId, setSpecialtyId] = useState("");
 
   const handleClose = () => setModal(false);
 
@@ -44,9 +55,35 @@ export default function Users() {
     }
   }, []);
 
+  const GetClinic = useCallback(async () => {
+    try {
+      const response = await ClinicApi.getAll();
+      setClinics(response.data.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }, []);
+
+  const GetSpecialty = useCallback(async () => {
+    try {
+      const response = await SpecialtyApi.getAll();
+      setSpecialties(response.data.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }, []);
+
   useEffect(() => {
-    GetUser();
-  }, [GetUser]);
+    setTimeout(() => {
+      GetUser();
+    }, 300);
+    setTimeout(() => {
+      GetClinic();
+    }, 300);
+    setTimeout(() => {
+      GetSpecialty();
+    }, 300);
+  }, [GetClinic, GetSpecialty, GetUser]);
 
   const handleDelete = (id) => {
     UserApi.deleteUser(id);
@@ -89,7 +126,9 @@ export default function Users() {
                 </TableCell>
                 <TableCell align="left">{user.gender}</TableCell>
                 <TableCell align="left">{user.role}</TableCell>
-                <TableCell align="left">{user.birthday}</TableCell>
+                <TableCell align="left">
+                  {moment(user.birthday).format("DD-MM-YYYY")}
+                </TableCell>
                 <TableCell align="left">{user.address}</TableCell>
                 <TableCell align="left">{user.phoneNumber}</TableCell>
                 {/* <TableCell align="left">{user.clinicId}</TableCell>
@@ -204,12 +243,26 @@ export default function Users() {
               variant="outlined"
               onChange={(e) => setRole(e.target.value)}
             />
-            <TextField
-              flex={1}
-              label="Birthday"
-              variant="outlined"
-              onChange={(e) => setBirthday(e.target.value)}
-            />
+            <Stack direction="row" spacing={2}>
+              <TextField
+                flex={1}
+                label="Year"
+                variant="outlined"
+                onChange={(e) => setYear(e.target.value)}
+              />
+              <TextField
+                flex={1}
+                label="Month"
+                variant="outlined"
+                onChange={(e) => setMonth(e.target.value)}
+              />
+              <TextField
+                flex={1}
+                label="Day"
+                variant="outlined"
+                onChange={(e) => setDay(e.target.value)}
+              />
+            </Stack>
             <TextField
               flex={1}
               label="Address"
@@ -222,44 +275,101 @@ export default function Users() {
               variant="outlined"
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-            <TextField
+            <InputLabel>clinicId</InputLabel>
+            <Select
               flex={1}
-              label="Clinic Id"
+              value={clinicId}
               variant="outlined"
               onChange={(e) => setClinicId(e.target.value)}
-            />
-            <TextField
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              {clinics?.map((clinic, index) => (
+                <MenuItem key={index} value={clinic.id}>
+                  {clinic.name}
+                </MenuItem>
+              ))}
+            </Select>
+            <InputLabel>specialtyId</InputLabel>
+            <Select
               flex={1}
-              label="Specialty Id"
+              value={specialtyId}
               variant="outlined"
               onChange={(e) => setSpecialtyId(e.target.value)}
-            />
-
-            <Button
-              variant="contained"
-              onClick={() => {
-                UserApi.update(changeId, {
-                  email,
-                  firstName,
-                  middleName,
-                  lastName,
-                  gender,
-                  role,
-                  birthday,
-                  address,
-                  phoneNumber,
-                  clinicId,
-                  specialtyId,
-                });
-                GetUser();
-                setModal(false);
-              }}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
             >
-              Update User
-            </Button>
+              {specialties?.map((special, index) => (
+                <MenuItem key={index} value={special.id}>
+                  {special.name}
+                </MenuItem>
+              ))}
+            </Select>
+
+            {!!changeId ? (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  UserApi.update(changeId, {
+                    email: email,
+                    firstName: firstName,
+                    middleName: middleName,
+                    lastName: lastName,
+                    gender: gender,
+                    role: role,
+                    birthday: moment(`${year}-${month}-${day}', 'Asia`),
+                    address: address,
+                    phoneNumber: phoneNumber,
+                    clinicId: clinicId,
+                    specialtyId: specialtyId,
+                  });
+                  setTimeout(() => {
+                    GetUser();
+                  }, 500);
+                  setChangeId();
+                  setModal(false);
+                }}
+              >
+                Update User
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  UserApi.addNewUser({
+                    email: email,
+                    firstName: firstName,
+                    middleName: middleName,
+                    lastName: lastName,
+                    gender: gender,
+                    role: role,
+                    birthday: moment(`${year}-${month}-${day}', 'Asia`),
+                    address: address,
+                    phoneNumber: phoneNumber,
+                    clinicId: clinicId,
+                    specialtyId: specialtyId,
+                  });
+                  setTimeout(() => {
+                    GetUser();
+                  }, 500);
+                  setModal(false);
+                }}
+              >
+                Add New User
+              </Button>
+            )}
           </Stack>
         </Stack>
       </Modal>
+      <Stack justifyContent="center">
+        <Button
+          sx={{ maxWidth: 200, m: 1 }}
+          variant="contained"
+          onClick={() => setModal(true)}
+        >
+          Add New User
+        </Button>
+      </Stack>
     </Stack>
   );
 }

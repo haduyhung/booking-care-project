@@ -10,11 +10,10 @@ import {
   Paper,
   Stack,
   Modal,
-  Typography,
   TextField,
   Button,
 } from "@mui/material";
-import ClinicApi from "../../../apis/Clinic";
+import ClinicApi from "../../../apis/ClinicApi";
 
 export default function Clinic() {
   const [clinics, setClinics] = useState();
@@ -55,7 +54,6 @@ export default function Clinic() {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">ID</TableCell>
               <TableCell align="left">Name</TableCell>
               <TableCell align="left">Address</TableCell>
               <TableCell align="left">Phone</TableCell>
@@ -70,9 +68,6 @@ export default function Clinic() {
                 key={clinic.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="left" component="th">
-                  {clinic.id}
-                </TableCell>
                 <TableCell align="left" component="th">
                   {clinic.name}
                 </TableCell>
@@ -141,7 +136,7 @@ export default function Clinic() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -40%)",
+            transform: "translate(-50%, -50%)",
             width: 800,
             bgcolor: "white",
             border: "2px solid #333",
@@ -166,7 +161,7 @@ export default function Clinic() {
             />
             <TextField
               flex={1}
-              label="Role"
+              label="Phone"
               variant="outlined"
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -183,25 +178,58 @@ export default function Clinic() {
               onChange={(e) => setSpecialties(e.target.value)}
             />
 
-            <Button
-              variant="contained"
-              onClick={() => {
-                ClinicApi.updateClinic(changeId, {
-                  name,
-                  address,
-                  phone,
-                  email,
-                  specialties,
-                });
-                getClinic();
-                setModal(false);
-              }}
-            >
-              Update Clinic
-            </Button>
+            {!!changeId ? (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  ClinicApi.updateClinic(changeId, {
+                    name: name,
+                    address: address,
+                    phone: phone,
+                    email: email,
+                    specialties: specialties,
+                  });
+                  setTimeout(() => {
+                    getClinic();
+                  }, 500);
+                  setChangeId();
+                  setModal(false);
+                }}
+              >
+                Update Clinic
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  ClinicApi.addNewClinic({
+                    name: name,
+                    address: address,
+                    phone: phone,
+                    email: email,
+                    specialties: specialties,
+                  });
+                  setTimeout(() => {
+                    getClinic();
+                  }, 500);
+                  setModal(false);
+                }}
+              >
+                Add New Clinic
+              </Button>
+            )}
           </Stack>
         </Stack>
       </Modal>
+      <Stack justifyContent="center">
+        <Button
+          sx={{ maxWidth: 200, m: 1 }}
+          variant="contained"
+          onClick={() => setModal(true)}
+        >
+          Add New Clinic
+        </Button>
+      </Stack>
     </>
   );
 }
