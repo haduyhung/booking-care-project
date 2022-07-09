@@ -18,7 +18,7 @@ import {
   Button,
 } from "@mui/material";
 import UserApi from "../../../apis/UserApi";
-import ClinicApi from "../../../apis/Clinic";
+import ClinicApi from "../../../apis/ClinicApi";
 import SpecialtyApi from "../../../apis/SpecialtyApi";
 
 export default function Users() {
