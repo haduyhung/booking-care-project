@@ -95,7 +95,7 @@ export default function Users() {
 
   return (
     <Stack>
-      <TableContainer component={Paper}>
+      <TableContainer sx={{ overflow: "auto" }} component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -106,8 +106,6 @@ export default function Users() {
               <TableCell align="left">Birthday</TableCell>
               <TableCell align="left">Address</TableCell>
               <TableCell align="left">Phone Number</TableCell>
-              {/* <TableCell align="left">ClinicId</TableCell>
-              <TableCell align="left">SpecialtyId</TableCell> */}
               <TableCell align="left">Edit</TableCell>
               <TableCell align="left">Delete</TableCell>
             </TableRow>
@@ -131,8 +129,6 @@ export default function Users() {
                 </TableCell>
                 <TableCell align="left">{user.address}</TableCell>
                 <TableCell align="left">{user.phoneNumber}</TableCell>
-                {/* <TableCell align="left">{user.clinicId}</TableCell>
-                <TableCell align="left">{user.specialtyId}</TableCell> */}
                 <TableCell align="left">
                   <Stack
                     sx={{
@@ -193,7 +189,7 @@ export default function Users() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -40%)",
+            transform: "translate(-50%, -35%)",
             width: 800,
             bgcolor: "white",
             border: "2px solid #333",

@@ -25,7 +25,7 @@ function ShowPriceList({detail}) {
             <p className='title'>Giá khám:</p>
             {showPL ? null : (
                 <div className='btn-show'>
-                <p className='price-txt'>150.000đ</p>
+                <p className='price-txt'>{detail?.doctorInfor?.price.toLocaleString('en-US')}đ</p>
                 <button className='btn-more' type="button" onClick={handleClickPL}>
                     Xem chi tiết
                 </button>
@@ -45,7 +45,7 @@ function ShowPriceList({detail}) {
                             <p className='subtitle-show'>Không áp dụng</p>
                         </TableCell>
                         <TableCell component="th" scope="row" sx={{padding: 1}}>
-                            <p className='price'>{detail?.price}</p>
+                            <p className='price'>{detail?.doctorInfor?.price.toLocaleString('en-US')}đ</p>
                         </TableCell>
                         </TableRow>
                         <TableRow>
@@ -54,7 +54,7 @@ function ShowPriceList({detail}) {
                             <p className='subtitle-show'>Theo chỉ định của bác sĩ</p>
                         </TableCell>
                         <TableCell component="th" scope="row" sx={{padding: 1}}>
-                            <p className='price'>{detail?.price}</p>
+                            <p className='price'>{detail?.doctorInfor?.price.toLocaleString('en-US')}đ</p>
                         </TableCell>
                         </TableRow>
                     </TableBody>

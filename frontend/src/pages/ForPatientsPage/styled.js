@@ -68,11 +68,14 @@ const BookingWrapper = styled.div`
             color: #45c3d2;
             font-weight: bold;
             margin: 0;
+            padding-bottom: 10px;
           }
 
           .detail{
             color: #555;
             font-size: 14px;
+            margin: 0;
+            padding-bottom: 10px;
           }
 
           .address{
