@@ -25,7 +25,7 @@ const Router = () => {
             path="ExaminationPackagesPage"
             element={<ExaminationPackagesPage />}
           />
-          <Route path="ForDoctorsPage" element={<ForDoctorsPage />} />
+          <Route path="ForDoctorsPage/:id" element={<ForDoctorsPage />} />
           <Route path="admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Route>
