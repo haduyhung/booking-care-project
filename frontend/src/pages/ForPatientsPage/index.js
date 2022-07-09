@@ -10,9 +10,11 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from "@mui/material";
 
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import baseURL from '../../utils';
+
+import * as image from "../../assets";
 
 import SpecialistFrom from '../../components/atoms/SpecialistForm';
 import ShowPriceList from '../../components/atoms/ShowForm/ShowPriceList';
@@ -24,10 +26,9 @@ import DoctorApi from '../../apis/DoctorApi';
 
 export default function ForPatientsPage() {
   let {id} = useParams();
-  const [location, setLocation] = React.useState('');
-  const [date, setDate] = React.useState('');
-
-  console.log('1', id);
+  let navigate = useNavigate();
+  const [location, setLocation] = useState('');
+  const [date, setDate] = useState('');
 
   const [detailSpecs, setDetailSpecs] = useState();
   const [doctors, setDoctors] = useState();
@@ -43,7 +44,7 @@ export default function ForPatientsPage() {
 
   const getDoctor = useCallback(async () => {
     try {
-      const response = await DoctorApi.getAll({specialtyId: id});
+      const response = await DoctorApi.getAll({ specialtyId: id});
       setDoctors(response.data.data);
     } catch (error) {
       console.error(error.response);
@@ -54,6 +55,10 @@ export default function ForPatientsPage() {
     getSpecialty();
     getDoctor();
   }, [getSpecialty, getDoctor]);
+
+  const handleToDetail = (doctor) => {
+    navigate(`/ForDoctorsPage/${doctor.id}`);
+  };
 
   const handleChangeLocation = (event) => {
       setLocation(event.target.value);
@@ -88,12 +93,24 @@ export default function ForPatientsPage() {
           <div className='wrapper' key={doctor.id}>
             <div className='wp-left'>
               <div className='img'>
-                <Avatar
-                alt={doctor.id}
-                src={`${baseURL}${doctor.avatar}`}
-                sx={{ width: 100, height: 100, mb: 1}}
-                />
-                <Link className='link' to={''}>Xem thêm</Link>
+                {!doctor.avatar ? (
+                  <Avatar
+                    alt={doctor.id}
+                    src={image.DepthsDefault}
+                    sx={{width: 100, height: 100, mb: 1}}
+                  />
+                ) : (
+                  <Avatar
+                    alt={doctor.id}
+                    src={`${baseURL}${doctor.avatar}`}
+                    sx={{width: 100, height: 100, mb: 1}}
+                  />
+                )}
+                <Link className='link' 
+                  onClick={() => handleToDetail(doctor)}
+                >
+                Xem thêm
+                </Link>
               </div>
                 <div className='information'>
                 <p className='name'>Giáo sư, Tiến sĩ, Bác sĩ {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
@@ -146,7 +163,7 @@ export default function ForPatientsPage() {
             <div className='booking-address'>
                 <p className='title'>ĐỊA CHỈ KHÁM</p>
                 <p className='content'>
-                  {doctor.address}
+                  {doctor?.clinic?.address}
                 </p>
             </div>
 

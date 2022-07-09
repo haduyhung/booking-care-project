@@ -10,8 +10,11 @@ import {
 import React, { useState, useEffect } from "react";
 import ClinicApi from "../../apis/ClinicApi";
 import * as image from "../../assets/index";
+import baseURL from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 const FacilitiesPage = () => {
+  let navigate = useNavigate();
   const [clinics, setClinic] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -29,6 +32,10 @@ const FacilitiesPage = () => {
   useEffect(() => {
     callGetAllClinics();
   }, []);
+
+  const handleToDetail = (depth) => {
+    navigate(`/ForPatientsPage/${depth.id}`);
+  };
 
   return (
     <Box bgcolor="#F5F5F5">
@@ -87,7 +94,7 @@ const FacilitiesPage = () => {
               }}
               component="div"
             >
-              <Link href="/">
+              <Link onClick={() => handleToDetail(clinic)}>
                 {!clinic.image ? (
                   <img
                     src={image.DepthsDefault}
@@ -97,7 +104,7 @@ const FacilitiesPage = () => {
                   />
                 ) : (
                   <img
-                    src={clinic.image}
+                    src={`${baseURL}${clinic.image}`}
                     alt={clinic.name}
                     width={100}
                     height={50}
@@ -105,7 +112,7 @@ const FacilitiesPage = () => {
                 )}
               </Link>
               <Link
-                href="/"
+                onClick={() => handleToDetail(clinic)}
                 underline="none"
                 color="#333333"
                 sx={{

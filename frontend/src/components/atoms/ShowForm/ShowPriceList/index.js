@@ -45,7 +45,7 @@ function ShowPriceList({detail}) {
                             <p className='subtitle-show'>Không áp dụng</p>
                         </TableCell>
                         <TableCell component="th" scope="row" sx={{padding: 1}}>
-                            <p className='price'>{detail.price}</p>
+                            <p className='price'>{detail?.price}</p>
                         </TableCell>
                         </TableRow>
                         <TableRow>
@@ -54,7 +54,7 @@ function ShowPriceList({detail}) {
                             <p className='subtitle-show'>Theo chỉ định của bác sĩ</p>
                         </TableCell>
                         <TableCell component="th" scope="row" sx={{padding: 1}}>
-                            <p className='price'>{detail.price}</p>
+                            <p className='price'>{detail?.price}</p>
                         </TableCell>
                         </TableRow>
                     </TableBody>

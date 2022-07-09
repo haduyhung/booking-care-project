@@ -10,15 +10,18 @@ import {
 import React, { useState, useEffect } from "react";
 import DoctorApi from "../../apis/DoctorApi";
 import * as image from "../../assets/index";
+import { useNavigate } from "react-router-dom";
+import baseURL from "../../utils";
 
 const DoctorsListPage = () => {
+  let navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const callGetAllDoctors = async () => {
     setLoading(true);
     try {
-      const data = await DoctorApi.getAllDoctors();
+      const data = await DoctorApi.getAll();
       setDoctors(data.data?.data);
     } catch (error) {
       console.log(error);
@@ -29,6 +32,10 @@ const DoctorsListPage = () => {
   useEffect(() => {
     callGetAllDoctors();
   }, []);
+
+  const handleToDetail = (doctor) => {
+    navigate(`/ForDoctorsPage/${doctor.id}`);
+  };
 
   return (
     <Box bgcolor="#F5F5F5">
@@ -86,8 +93,8 @@ const DoctorsListPage = () => {
               }}
               component="div"
             >
-              <Link href={doctor.url}>
-                {!doctor.image ? (
+              <Link onClick={() => handleToDetail(doctor)}>
+                {!doctor.avatar ? (
                   <img
                     src={image.DepthsDefault}
                     alt={doctor.lastName}
@@ -97,7 +104,7 @@ const DoctorsListPage = () => {
                   />
                 ) : (
                   <img
-                    src={doctor.avatar}
+                    src={`${baseURL}${doctor.avatar}`}
                     alt={doctor.lastName}
                     width={50}
                     height={50}
@@ -112,7 +119,7 @@ const DoctorsListPage = () => {
                 }}
               >
                 <Link
-                  href="/"
+                  onClick={() => handleToDetail(doctor)}
                   underline="none"
                   color="#333333"
                   sx={{
@@ -122,13 +129,11 @@ const DoctorsListPage = () => {
                   }}
                 >
                   <ListItemText>
-                    {doctor.lastName}
-                    {doctor.middleName}
-                    {doctor.firstName}
+                    {doctor.lastName} {doctor.middleName} {doctor.firstName}
                   </ListItemText>
                 </Link>
                 <Link
-                  href="/"
+                  onClick={() => handleToDetail(doctor)}
                   underline="none"
                   color="#999999"
                   sx={{

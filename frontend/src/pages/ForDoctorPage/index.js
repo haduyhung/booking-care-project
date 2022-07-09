@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Box, 
   Link, 
@@ -14,14 +14,35 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { useParams } from 'react-router-dom';
 
-import * as images from '../../assets';
+import * as image from '../../assets';
 
 import ShowPriceList from '../../components/atoms/ShowForm/ShowPriceList';
 import ShowInsurance from '../../components/atoms/ShowForm/ShowInsurance';
 
+import DoctorApi from '../../apis/DoctorApi';
+import baseURL from '../../utils';
+
 const ForDoctorsPage = () => {
-  const [date, setDate] = React.useState('');
+  let {id} = useParams();
+  const [date, setDate] = useState('');
+  const [doctor, setDoctors] = useState('');
+
+  console.log('rs', doctor);
+
+  const getDoctor = useCallback(async () => {
+    try {
+      const response = await DoctorApi.getOne(id);
+      setDoctors(response.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    getDoctor();
+  }, [getDoctor]);
 
   const handleChangeDate = (event) => {
       setDate(event.target.value);
@@ -37,7 +58,7 @@ const ForDoctorsPage = () => {
           <Link
             underline="none"
             color="#45c3d2"
-            href="/ExaminationPackagesPage"
+            href="/DepthsListPage"
             sx={{fontSize: 14}}
           >
             Khám chuyên khoa
@@ -45,23 +66,30 @@ const ForDoctorsPage = () => {
           <Link
             underline="none"
             color="#45c3d2"
-            href="/ExaminationPackagesPage"
+            href={`/ForPatientsPage/${doctor?.specialty?.id}`}
             sx={{fontSize: 14}}
           >
-            Sức khỏe tâm thần
+            {doctor?.specialty?.name}
           </Link>
         </Breadcrumbs>
       </Container>
-
       <Container>
         <Box sx={{ py: 4, display: "flex"}}>
-          <Avatar
-          alt="Remy Sharp"
-          src={images.GS_Tran_Ngoc_An}
-          sx={{width: 100, height: 100, mb: 1}}
-          />
+          {!doctor.avatar ? (
+            <Avatar
+              alt={doctor.id}
+              src={image.DepthsDefault}
+              sx={{width: 100, height: 100, mb: 1}}
+            />
+          ) : (
+            <Avatar
+              alt={doctor.id}
+              src={`${baseURL}${doctor.avatar}`}
+              sx={{width: 100, height: 100, mb: 1}}
+            />
+          )}
           <Box sx={{width: '50%', pl: 2}}>
-            <Typography sx={{fontSize: 18, fontWeight: 'bold', pb: 1}}>Bác sĩ Chuyên khoa II Trần Minh Khuyên</Typography>
+            <Typography sx={{fontSize: 18, fontWeight: 'bold', pb: 1}}>Bác sĩ Chuyên khoa II {doctor.lastName} {doctor.middleName} {doctor.firstName}</Typography>
             <Typography sx={{fontSize: 13, color: '#555'}}>
               Nguyên Trưởng khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
               Tốt nghiệp Tâm lý trị liệu, trường Tâm lý Thực hành Paris (Psychology practique de Paris)
@@ -69,7 +97,6 @@ const ForDoctorsPage = () => {
             </Typography>
           </Box>
         </Box>
-
         <FormControl variant="standard" sx={{ width: 120 }}>
         <InputLabel id="demo-simple-select-standard-label">Date</InputLabel>
           <Select
@@ -138,15 +165,14 @@ const ForDoctorsPage = () => {
           </Box>
           <Box sx={{flex: 1, p: 2}}>
             <Typography sx={{fontSize: 14, textTransform: 'uppercase', color: '#666', lineHeight: 2}}>Địa chỉ khám</Typography>
-            <Typography sx={{fontSize: 13, fontWeight: 'bold', lineHeight: 2}}>Phòng khám Bệnh viện Đại học Y Dược 1</Typography>
-            <Typography sx={{fontSize: 13, lineHeight: 2}}>20-22 Dương Quang Trung, Phường 12, Quận 10, Tp. HCM</Typography>
+            <Typography sx={{fontSize: 13, fontWeight: 'bold', lineHeight: 2}}>{doctor?.clinic?.name}</Typography>
+            <Typography sx={{fontSize: 13, lineHeight: 2}}>{doctor?.clinic?.address}</Typography>
             
-            <ShowPriceList />
+            <ShowPriceList detail={doctor}/>
             <ShowInsurance />
           
           </Box>
         </Box>
-
       </Container>
     </Box>
   )

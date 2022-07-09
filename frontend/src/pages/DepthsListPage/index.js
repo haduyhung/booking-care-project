@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import SpecialtyApi from "../../apis/SpecialtyApi";
 import baseURL from "../../utils";
 
+import * as image from "../../assets";
+
 const DepthsListPage = () => {
   let navigate = useNavigate();
   const [specialties, setSpecialties] = useState();
@@ -60,12 +62,21 @@ const DepthsListPage = () => {
               <Link
                 onClick={() => handleToDetail(depth)}
               >
+                {!depth.image ? (
+                  <img
+                    src={image.DepthsDefault}
+                    alt={depth.name}
+                    width={100}
+                    height={50}
+                  />
+                ) : (
                 <img
                   src={`${baseURL}${depth.image}`}
                   alt={depth.name}
                   width={100}
                   height={50}
                 />
+                )}
               </Link>
               <Link
                 onClick={() => handleToDetail(depth)}
