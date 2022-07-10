@@ -17,6 +17,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  CircularProgress,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -49,6 +50,8 @@ const ForDoctorsPage = () => {
   const [address, setAddress] = useState();
   const [reason, setReason] = useState();
 
+  const [loading, setLoading] = useState(false);
+
   const getDoctor = useCallback(async () => {
     try {
       const response = await DoctorApi.getOne(id);
@@ -63,6 +66,7 @@ const ForDoctorsPage = () => {
   }, [getDoctor]);
 
   const getDoctorSchedules = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await SchedulesApi.getSchedules({
         doctorId: id,
@@ -72,6 +76,8 @@ const ForDoctorsPage = () => {
       setDoctorSchedules(response.data.data);
     } catch (error) {
       console.error(error.response);
+    } finally {
+      setLoading(false);
     }
   }, [date, id]);
 
@@ -150,12 +156,12 @@ const ForDoctorsPage = () => {
             sx={{ color: "#337ab7" }}
           >
             <MenuItem value={undefined}>none</MenuItem>
-            <MenuItem value="07-09">Thứ 2: 09/07</MenuItem>
-            <MenuItem value="07-10">Thứ 3: 10/07</MenuItem>
-            <MenuItem value="07-11">Thứ 4: 11/07</MenuItem>
-            <MenuItem value="07-12">Thứ 5: 12/07</MenuItem>
-            <MenuItem value="07-13">Thứ 6: 13/07</MenuItem>
-            <MenuItem value="07-14">Thứ 7: 14/07</MenuItem>
+            <MenuItem value="07-11">Thứ 2: 11/07</MenuItem>
+            <MenuItem value="07-12">Thứ 3: 12/07</MenuItem>
+            <MenuItem value="07-13">Thứ 4: 13/07</MenuItem>
+            <MenuItem value="07-14">Thứ 5: 14/07</MenuItem>
+            <MenuItem value="07-15">Thứ 6: 15/07</MenuItem>
+            <MenuItem value="07-16">Thứ 7: 16/07</MenuItem>
           </Select>
         </FormControl>
 
@@ -175,6 +181,17 @@ const ForDoctorsPage = () => {
               </Typography>
             </Box>
             <Box sx={{ py: 1 }}>
+              {loading && (
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              )}
               {doctorSchedules?.map((schedule) => (
                 <Button
                   sx={{
@@ -276,7 +293,7 @@ const ForDoctorsPage = () => {
                 <Stack spacing={0.2}>
                   <Typography>ĐẶT LỊCH KHÁM</Typography>
                   <Typography>
-                    {doctor?.doctorInfor.position}: {doctor.firstName}{" "}
+                    {doctor?.doctorInfor?.position}: {doctor.firstName}{" "}
                     {doctor.middleName} {doctor.lastName}
                   </Typography>
                   <Typography>Ngày khám: {selectDate}</Typography>
@@ -333,9 +350,7 @@ const ForDoctorsPage = () => {
                 variant="outlined"
                 onChange={(e) => setReason(e.target.value)}
               />
-              <Stack direction="row">
-                
-              </Stack>
+              <Stack direction="row"></Stack>
               <Button
                 variant="contained"
                 onClick={() => {

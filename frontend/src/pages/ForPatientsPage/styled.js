@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 const BookingWrapper = styled.div`
 
+  .specialist-name{
+    font-size: 21px;
+    font-weight: bold;
+  }
+
   .introduce{
     padding-top: 10px;
     padding-bottom: 20px;
