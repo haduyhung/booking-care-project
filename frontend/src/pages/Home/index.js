@@ -242,7 +242,7 @@ const specialties = [
 const specialtiesButton = [
   {
     name: "Khám Chuyên Khoa",
-    url: "/",
+    url: "/DepthsListPage",
     image: images.KhamChuyenKhoa,
   },
   {

@@ -17,6 +17,7 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  CircularProgress,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -49,6 +50,8 @@ const ForDoctorsPage = () => {
   const [address, setAddress] = useState();
   const [reason, setReason] = useState();
 
+  const [loading, setLoading] = useState(false);
+
   const getDoctor = useCallback(async () => {
     try {
       const response = await DoctorApi.getOne(id);
@@ -63,6 +66,7 @@ const ForDoctorsPage = () => {
   }, [getDoctor]);
 
   const getDoctorSchedules = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await SchedulesApi.getSchedules({
         doctorId: id,
@@ -72,6 +76,8 @@ const ForDoctorsPage = () => {
       setDoctorSchedules(response.data.data);
     } catch (error) {
       console.error(error.response);
+    } finally {
+      setLoading(false);
     }
   }, [date, id]);
 
@@ -127,7 +133,8 @@ const ForDoctorsPage = () => {
           )}
           <Box sx={{ width: "50%", pl: 2 }}>
             <Typography sx={{ fontSize: 18, fontWeight: "bold", pb: 1 }}>
-              {doctor?.doctorInfor?.position} {doctor.lastName} {doctor.middleName} {doctor.firstName}
+              {doctor?.doctorInfor?.position} {doctor.lastName}{" "}
+              {doctor.middleName} {doctor.firstName}
             </Typography>
             <Typography sx={{ fontSize: 13, color: "#555" }}>
               {doctor?.doctorInfor?.introduct}
@@ -174,6 +181,17 @@ const ForDoctorsPage = () => {
               </Typography>
             </Box>
             <Box sx={{ py: 1 }}>
+              {loading && (
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              )}
               {doctorSchedules?.map((schedule) => (
                 <Button
                   sx={{
@@ -193,7 +211,8 @@ const ForDoctorsPage = () => {
                   }}
                 >
                   <Typography sx={{ fontSize: 14, fontWeight: "500" }}>
-                    {moment(schedule?.timeStart).format("LT")} - {moment(schedule?.timeEnd).format("LT")}
+                    {moment(schedule?.timeStart).format("LT")} -{" "}
+                    {moment(schedule?.timeEnd).format("LT")}
                   </Typography>
                 </Button>
               ))}
@@ -324,7 +343,7 @@ const ForDoctorsPage = () => {
       </Container>
 
       <Container sx={{ mt: 2, borderTop: 1, borderColor: "gray" }}>
-        <Typography sx={{ fontSize: 14, lineHeight: 2, py: 2}}>
+        <Typography sx={{ fontSize: 14, lineHeight: 2, py: 2 }}>
           {doctor?.doctorInfor?.description}
         </Typography>
       </Container>
