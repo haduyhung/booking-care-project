@@ -4,6 +4,7 @@ import Users from "./components/users";
 import Doctor from "./components/Doctor";
 import Clinic from "./components/Clinic";
 import Specialty from "./components/Specialty";
+import Schedules from "./components/Schedules";
 
 function Admin() {
   const [table, setTable] = useState(<Users />);
@@ -56,6 +57,15 @@ function Admin() {
           }}
         >
           Specialty
+        </Button>
+        <Button
+          variant={showedTable === "schedules" ? "contained" : "outlined"}
+          onClick={() => {
+            setTable(<Schedules />);
+            setShowedTable("schedules");
+          }}
+        >
+          Schedules
         </Button>
       </Stack>
       <Stack

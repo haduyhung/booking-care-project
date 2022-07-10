@@ -29,7 +29,7 @@ export default function Clinic() {
 
   const getClinic = useCallback(async () => {
     try {
-      const response = await ClinicApi.getAll();
+      const response = await ClinicApi.getAllClinics();
       setClinics(response.data.data);
     } catch (error) {
       console.error(error.response);
