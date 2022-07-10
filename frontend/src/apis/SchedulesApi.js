@@ -9,8 +9,16 @@ const SchedulesApi = {
     return requestClient.get(urlParam, { params: param });
   },
 
-  addNewSchedules(id, data, token) {
+  deleteSchedules(id, token) {
     const urlParam = `schedules/${id}`;
+
+    return requestClient.delete(urlParam, token);
+  },
+
+  addNewSchedules(data, token) {
+    const urlParam = `schedules`;
+
+    console.log("timeeeee", data);
     return requestClient.post(urlParam, data, token);
   },
 };

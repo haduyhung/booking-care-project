@@ -8,7 +8,7 @@ import Select from '@mui/material/Select';
 import Avatar from '@mui/material/Avatar';
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { Link } from "@mui/material";
+import { Link, Box, CircularProgress } from "@mui/material";
 
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ export default function ForPatientsPage() {
       setDoctors(response.data.data);
     } catch (error) {
       console.error(error.response);
-    }
+    } 
   }, [id]);
 
   useEffect(() => {
@@ -89,90 +89,93 @@ export default function ForPatientsPage() {
             <MenuItem value={30}>Hồ Chí Minh</MenuItem>
             </Select>
           </FormControl>
-        {doctors?.map((doctor) => (
-          <div className='wrapper' key={doctor.id}>
-            <div className='wp-left'>
-              <div className='img'>
-                {!doctor.avatar ? (
-                  <Avatar
-                    alt={doctor.id}
-                    src={image.DepthsDefault}
-                    sx={{width: 100, height: 100, mb: 1}}
-                  />
-                ) : (
-                  <Avatar
-                    alt={doctor.id}
-                    src={`${baseURL}${doctor.avatar}`}
-                    sx={{width: 100, height: 100, mb: 1}}
-                  />
-                )}
-                <Link className='link' 
-                  onClick={() => handleToDetail(doctor)}
-                >
-                Xem thêm
-                </Link>
-              </div>
-                <div className='information'>
-                <p className='name'>{doctor?.doctorInfor?.introduct} {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
-                <p className='detail'>
-                  {doctor?.doctorInfor?.description}
-                </p>
-                <p className='detail'>
-                  {doctor?.doctorInfor?.note}
-                </p>
-                <div className='address'>
-                  <div className="icons">
-                      <LocationOnIcon fontSize="small" />
+          {doctors?.map((doctor) => (
+            <div className='wrapper' key={doctor.id}>
+              <div className='wp-left'>
+                <div className='img'>
+                  {!doctor.avatar ? (
+                    <Avatar
+                      alt={doctor.id}
+                      src={image.DepthsDefault}
+                      sx={{width: 100, height: 100, mb: 1}}
+                    />
+                  ) : (
+                    <Avatar
+                      alt={doctor.id}
+                      src={`${baseURL}${doctor.avatar}`}
+                      sx={{width: 100, height: 100, mb: 1}}
+                    />
+                  )}
+                  <Link className='link' 
+                    onClick={() => handleToDetail(doctor)}
+                  >
+                  Xem thêm
+                  </Link>
+                </div>
+                  <div className='information'>
+                  <p className='name'>{doctor?.doctorInfor?.position} {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
+                  <p className='detail'>
+                    {doctor?.doctorInfor?.introduct}
+                  </p>
+                  <p className='detail'>
+                    {doctor?.doctorInfor?.note}
+                  </p>
+                  <div className='address'>
+                    <div className="icons">
+                        <LocationOnIcon fontSize="small" />
+                    </div>
+                      Hà nội
                   </div>
-                    Hà nội
                 </div>
+            </div>
+
+            <div className='wp-right'>
+              {/* <FormControl variant="standard" sx={{ width: 120 }}>
+                  <InputLabel id="demo-simple-select-standard-label">Date</InputLabel>
+                  <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={date}
+                  onChange={handleChangeDate}
+                  label="Date"
+                  className='select'
+                  sx={{ color: '#337ab7' }}
+                  >
+                  <MenuItem value={10}>Thứ 6: 27/05</MenuItem>
+                  <MenuItem value={20}>Thứ 7: 28/05</MenuItem>
+                  <MenuItem value={30}>Thứ 2: 30/05</MenuItem>
+                  </Select>
+              </FormControl> */}
+
+              <div className='calender'>
+                  <div className='title'>
+                    <CalendarMonthIcon fontSize='small'/>
+                    <p className='text'>LỊCH KHÁM</p>
+                  </div>
+
+                  <div className='booking'>
+                    <Link className='btn-booking' onClick={() => handleToDetail(doctor)}>Đăng ký khám</Link>
+                  </div>
+
+                  <p className='txt'>Chọn  và đặt (Phí đặt lịch 0đ)</p>
               </div>
-          </div>
 
-          <div className='wp-right'>
-            {/* <FormControl variant="standard" sx={{ width: 120 }}>
-                <InputLabel id="demo-simple-select-standard-label">Date</InputLabel>
-                <Select
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
-                value={date}
-                onChange={handleChangeDate}
-                label="Date"
-                className='select'
-                sx={{ color: '#337ab7' }}
-                >
-                <MenuItem value={10}>Thứ 6: 27/05</MenuItem>
-                <MenuItem value={20}>Thứ 7: 28/05</MenuItem>
-                <MenuItem value={30}>Thứ 2: 30/05</MenuItem>
-                </Select>
-            </FormControl> */}
+              <div className='booking-address'>
+                  <p className='title'>ĐỊA CHỈ KHÁM</p>
+                  <p className='content'>
+                    {doctor?.clinic?.name}
+                  </p>
+                  <p className='content'>
+                    {doctor?.clinic?.address}
+                  </p>
+              </div>
 
-            <div className='calender'>
-                <div className='title'>
-                  <CalendarMonthIcon fontSize='small'/>
-                  <p className='text'>LỊCH KHÁM</p>
-                </div>
+              <ShowPriceList detail={doctor}/>
 
-                <div className='booking'>
-                  <Link className='btn-booking' onClick={() => handleToDetail(doctor)}>Đăng ký khám</Link>
-                </div>
-
-                <p className='txt'>Chọn  và đặt (Phí đặt lịch 0đ)</p>
+              <ShowInsurance />
+              </div>
             </div>
-
-            <div className='booking-address'>
-                <p className='title'>ĐỊA CHỈ KHÁM</p>
-                <p className='content'>
-                  {doctor?.clinic?.address}
-                </p>
-            </div>
-
-            <ShowPriceList detail={doctor}/>
-
-            <ShowInsurance />
-            </div>
-          </div>
-        ))}
+          ))}
         </Container>
       </div>
     </div>

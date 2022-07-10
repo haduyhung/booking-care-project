@@ -57,7 +57,7 @@ export default function Users() {
 
   const GetClinic = useCallback(async () => {
     try {
-      const response = await ClinicApi.getAll();
+      const response = await ClinicApi.getAllClinics();
       setClinics(response.data.data);
     } catch (error) {
       console.error(error.response);
@@ -189,7 +189,7 @@ export default function Users() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -35%)",
+            transform: "translate(-50%, -40%)",
             width: 800,
             bgcolor: "white",
             border: "2px solid #333",
@@ -233,12 +233,6 @@ export default function Users() {
               variant="outlined"
               onChange={(e) => setGender(e.target.value)}
             />
-            <TextField
-              flex={1}
-              label="Role"
-              variant="outlined"
-              onChange={(e) => setRole(e.target.value)}
-            />
             <Stack direction="row" spacing={2}>
               <TextField
                 flex={1}
@@ -271,6 +265,19 @@ export default function Users() {
               variant="outlined"
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
+            <InputLabel>Role</InputLabel>
+            <Select
+              flex={1}
+              value={role}
+              variant="outlined"
+              onChange={(e) => setRole(e.target.value)}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="USER">USER</MenuItem>
+              <MenuItem value="DOCTOR">DOCTOR</MenuItem>
+              <MenuItem value="ADMIN">ADMIN</MenuItem>
+            </Select>
             <InputLabel>clinicId</InputLabel>
             <Select
               flex={1}
