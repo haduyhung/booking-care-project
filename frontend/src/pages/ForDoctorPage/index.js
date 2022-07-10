@@ -80,7 +80,7 @@ const ForDoctorsPage = () => {
   }, [getDoctorSchedules]);
 
   const handleChangeDate = (event) => {
-    const isDate = new Date(`2022-${event.target.value}T00:00:00Z`);
+    const isDate = new Date(`2022-${event.target.value}T00:00:00.000Z`);
     setDate(isDate);
     setSelectDate(event.target.value);
   };
@@ -127,14 +127,13 @@ const ForDoctorsPage = () => {
           )}
           <Box sx={{ width: "50%", pl: 2 }}>
             <Typography sx={{ fontSize: 18, fontWeight: "bold", pb: 1 }}>
-              Bác sĩ Chuyên khoa II {doctor.lastName} {doctor.middleName}{" "}
-              {doctor.firstName}
+              {doctor?.doctorInfor?.position} {doctor.lastName} {doctor.middleName} {doctor.firstName}
             </Typography>
             <Typography sx={{ fontSize: 13, color: "#555" }}>
-              Nguyên Trưởng khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-              Tốt nghiệp Tâm lý trị liệu, trường Tâm lý Thực hành Paris
-              (Psychology practique de Paris) Bác sĩ nhận khám từ 16 tuổi trở
-              lên
+              {doctor?.doctorInfor?.introduct}
+            </Typography>
+            <Typography sx={{ fontSize: 13, color: "#555", pt: 1 }}>
+              {doctor?.doctorInfor?.note}
             </Typography>
           </Box>
         </Box>
@@ -174,13 +173,14 @@ const ForDoctorsPage = () => {
                 Lịch khám
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", py: 1 }}>
+            <Box sx={{ py: 1 }}>
               {doctorSchedules?.map((schedule) => (
                 <Button
                   sx={{
                     px: 2.5,
                     py: 1,
                     mr: 1,
+                    my: 1,
                     color: "#333",
                     backgroundColor: "#fff04b",
                     "&:hover": {
@@ -193,8 +193,7 @@ const ForDoctorsPage = () => {
                   }}
                 >
                   <Typography sx={{ fontSize: 14, fontWeight: "500" }}>
-                    {moment(schedule.timeStart).format("LT")} -
-                    {moment(schedule.timeEnd).format("LT")}
+                    {moment(schedule?.timeStart).format("LT")} - {moment(schedule?.timeEnd).format("LT")}
                   </Typography>
                 </Button>
               ))}
@@ -317,11 +316,17 @@ const ForDoctorsPage = () => {
                   alert("Ban chua nhap du thong tin!");
                 }}
               >
-                Add New Clinic
+                Xác nhận đặt lịch
               </Button>
             </Stack>
           </Stack>
         </Modal>
+      </Container>
+
+      <Container sx={{ mt: 2, borderTop: 1, borderColor: "gray" }}>
+        <Typography sx={{ fontSize: 14, lineHeight: 2, py: 2}}>
+          {doctor?.doctorInfor?.description}
+        </Typography>
       </Container>
     </Box>
   );

@@ -113,9 +113,9 @@ export default function ForPatientsPage() {
                 </Link>
               </div>
                 <div className='information'>
-                <p className='name'>{doctor?.doctorInfor?.introduct} {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
+                <p className='name'>{doctor?.doctorInfor?.position} {doctor.lastName} {doctor.middleName} {doctor.firstName}</p>
                 <p className='detail'>
-                  {doctor?.doctorInfor?.description}
+                  {doctor?.doctorInfor?.introduct}
                 </p>
                 <p className='detail'>
                   {doctor?.doctorInfor?.note}
@@ -162,6 +162,9 @@ export default function ForPatientsPage() {
 
             <div className='booking-address'>
                 <p className='title'>ĐỊA CHỈ KHÁM</p>
+                <p className='content'>
+                  {doctor?.clinic?.name}
+                </p>
                 <p className='content'>
                   {doctor?.clinic?.address}
                 </p>
