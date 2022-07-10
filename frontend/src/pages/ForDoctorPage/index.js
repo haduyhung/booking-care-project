@@ -11,6 +11,12 @@ import {
   Select,
   MenuItem,
   Button,
+  Stack,
+  Modal,
+  TextField,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -33,6 +39,15 @@ const ForDoctorsPage = () => {
   const [selectDate, setSelectDate] = useState();
   const [doctor, setDoctors] = useState("");
   const [doctorSchedules, setDoctorSchedules] = useState();
+  const [selectSchedules, setSelectSchedules] = useState();
+
+  const [modal, setModal] = useState(false);
+  const [name, setName] = useState();
+  const [gender, setGender] = useState();
+  const [phone, setPhone] = useState();
+  const [birthday, setBirthday] = useState();
+  const [address, setAddress] = useState();
+  const [reason, setReason] = useState();
 
   const getDoctor = useCallback(async () => {
     try {
@@ -53,8 +68,8 @@ const ForDoctorsPage = () => {
         doctorId: id,
         date: date,
       });
-      console.log("res", response.data);
-      setDoctorSchedules(response.data);
+      console.log("res", response.data.data);
+      setDoctorSchedules(response.data.data);
     } catch (error) {
       console.error(error.response);
     }
@@ -65,7 +80,7 @@ const ForDoctorsPage = () => {
   }, [getDoctorSchedules]);
 
   const handleChangeDate = (event) => {
-    const isDate = new Date(`2022-${event.target.value}`);
+    const isDate = new Date(`2022-${event.target.value}T00:00:00Z`);
     setDate(isDate);
     setSelectDate(event.target.value);
   };
@@ -172,10 +187,14 @@ const ForDoctorsPage = () => {
                       backgroundColor: "#fff04b",
                     },
                   }}
+                  onClick={() => {
+                    setSelectSchedules(schedule);
+                    setModal(true);
+                  }}
                 >
                   <Typography sx={{ fontSize: 14, fontWeight: "500" }}>
                     {moment(schedule.timeStart).format("LT")} -
-                    {moment(schedule.timeStart).format("LT")}
+                    {moment(schedule.timeEnd).format("LT")}
                   </Typography>
                 </Button>
               ))}
@@ -208,6 +227,101 @@ const ForDoctorsPage = () => {
             <ShowInsurance />
           </Box>
         </Box>
+        <Modal
+          sx={{
+            overflowY: "scroll",
+            height: "100%",
+          }}
+          open={modal}
+          onClose={() => setModal(false)}
+        >
+          <Stack
+            p={5}
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 800,
+              bgcolor: "white",
+              border: "2px solid #333",
+              boxShadow: 24,
+              borderRadius: 2,
+              p: 4,
+            }}
+            spacing={5}
+          >
+            <Stack width="80%" py={2} spacing={2}>
+              <TextField
+                flex={1}
+                width="100%"
+                label="Name"
+                variant="outlined"
+                onChange={(e) => setName(e.target.value)}
+              />
+
+              <RadioGroup
+                sx={{
+                  flexDirection: "row",
+                }}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
+              </RadioGroup>
+
+              <TextField
+                flex={1}
+                label="Phone"
+                variant="outlined"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <TextField
+                flex={1}
+                label="Birthday"
+                variant="outlined"
+                onChange={(e) => setBirthday(e.target.value)}
+              />
+              <TextField
+                flex={1}
+                label="Address"
+                variant="outlined"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <TextField
+                flex={1}
+                label="Reason"
+                variant="outlined"
+                onChange={(e) => setReason(e.target.value)}
+              />
+              <Button
+                variant="contained"
+                onClick={() => {
+                  if (name && phone && gender && address) {
+                    SchedulesApi.deleteSchedules(selectSchedules.id);
+                    setModal(false);
+                    setTimeout(() => {
+                      getDoctorSchedules();
+                    }, 500);
+                  }
+                  alert("Ban chua nhap du thong tin!");
+                }}
+              >
+                Add New Clinic
+              </Button>
+            </Stack>
+          </Stack>
+        </Modal>
       </Container>
     </Box>
   );
