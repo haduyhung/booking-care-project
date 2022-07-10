@@ -31,8 +31,8 @@ const ClinicApi = {
     return requestClient.put(urlParam, data, token);
   },
 
-  getOneInfo(id, token) {
-    const urlParam = `clinic-infor/${id}`;
+  getOneInfo(clinicId) {
+    const urlParam = `clinic-infor/${clinicId}`;
 
     return requestClient.get(urlParam);
   },

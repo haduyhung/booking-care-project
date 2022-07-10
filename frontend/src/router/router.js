@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Admin from "../admin";
 import Layout from "../layout/DefaultLayout/index";
+import ClinicDetailPage from "../pages/ClinicDetailPage";
 import DepthsListPage from "../pages/DepthsListPage";
 import DoctorsListPage from "../pages/DoctorsListPage";
 import ExaminationPackagesPage from "../pages/ExaminationPackagesPage";
@@ -10,6 +11,7 @@ import ForDoctorsPage from "../pages/ForDoctorPage/index";
 import ForPatientsPage from "../pages/ForPatientsPage/index";
 import Home from "../pages/Home/index";
 import NotFound from "../pages/NotFoundPage/index";
+import RequireAuth from "./AuthRouter";
 
 const Router = () => {
   return (
@@ -25,8 +27,16 @@ const Router = () => {
             path="ExaminationPackagesPage"
             element={<ExaminationPackagesPage />}
           />
+          <Route path="ClinicDetailPage/:id" element={<ClinicDetailPage />} />
           <Route path="ForDoctorsPage/:id" element={<ForDoctorsPage />} />
-          <Route path="admin" element={<Admin />} />
+          <Route
+            path="Admin"
+            element={
+              <RequireAuth>
+                <Admin />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
