@@ -39,7 +39,7 @@ const ForDoctorsPage = () => {
   const [selectDate, setSelectDate] = useState();
   const [doctor, setDoctors] = useState("");
   const [doctorSchedules, setDoctorSchedules] = useState();
-  const [selectSchedules, setSelectSchedules] = useState();
+  const [timeSchedules, setTimeSchedules] = useState();
 
   const [modal, setModal] = useState(false);
   const [name, setName] = useState();
@@ -127,7 +127,8 @@ const ForDoctorsPage = () => {
           )}
           <Box sx={{ width: "50%", pl: 2 }}>
             <Typography sx={{ fontSize: 18, fontWeight: "bold", pb: 1 }}>
-              {doctor?.doctorInfor?.position} {doctor.lastName} {doctor.middleName} {doctor.firstName}
+              {doctor?.doctorInfor?.position} {doctor.lastName}{" "}
+              {doctor.middleName} {doctor.firstName}
             </Typography>
             <Typography sx={{ fontSize: 13, color: "#555" }}>
               {doctor?.doctorInfor?.introduct}
@@ -188,12 +189,17 @@ const ForDoctorsPage = () => {
                     },
                   }}
                   onClick={() => {
-                    setSelectSchedules(schedule);
+                    setTimeSchedules(
+                      `${moment(schedule?.timeStart).format("LT")} - ${moment(
+                        schedule?.timeEnd
+                      ).format("LT")}`
+                    );
                     setModal(true);
                   }}
                 >
                   <Typography sx={{ fontSize: 14, fontWeight: "500" }}>
-                    {moment(schedule?.timeStart).format("LT")} - {moment(schedule?.timeEnd).format("LT")}
+                    {moment(schedule?.timeStart).format("LT")} -{" "}
+                    {moment(schedule?.timeEnd).format("LT")}
                   </Typography>
                 </Button>
               ))}
@@ -253,6 +259,30 @@ const ForDoctorsPage = () => {
             spacing={5}
           >
             <Stack width="80%" py={2} spacing={2}>
+              <Stack direction="row" spacing={2}>
+                {!doctor.avatar ? (
+                  <Avatar
+                    alt={doctor.id}
+                    src={image.DepthsDefault}
+                    sx={{ width: 100, height: 100, mb: 1 }}
+                  />
+                ) : (
+                  <Avatar
+                    alt={doctor.id}
+                    src={`${baseURL}${doctor.avatar}`}
+                    sx={{ width: 100, height: 100, mb: 1 }}
+                  />
+                )}
+                <Stack spacing={0.2}>
+                  <Typography>ĐẶT LỊCH KHÁM</Typography>
+                  <Typography>
+                    {doctor?.doctorInfor.position}: {doctor.firstName}{" "}
+                    {doctor.middleName} {doctor.lastName}
+                  </Typography>
+                  <Typography>Ngày khám: {selectDate}</Typography>
+                  <Typography>Thời gian: {timeSchedules}</Typography>
+                </Stack>
+              </Stack>
               <TextField
                 flex={1}
                 width="100%"
@@ -303,11 +333,14 @@ const ForDoctorsPage = () => {
                 variant="outlined"
                 onChange={(e) => setReason(e.target.value)}
               />
+              <Stack direction="row">
+                
+              </Stack>
               <Button
                 variant="contained"
                 onClick={() => {
                   if (name && phone && gender && address) {
-                    SchedulesApi.deleteSchedules(selectSchedules.id);
+                    SchedulesApi.deleteSchedules(doctor.id);
                     setModal(false);
                     setTimeout(() => {
                       getDoctorSchedules();
@@ -324,7 +357,7 @@ const ForDoctorsPage = () => {
       </Container>
 
       <Container sx={{ mt: 2, borderTop: 1, borderColor: "gray" }}>
-        <Typography sx={{ fontSize: 14, lineHeight: 2, py: 2}}>
+        <Typography sx={{ fontSize: 14, lineHeight: 2, py: 2 }}>
           {doctor?.doctorInfor?.description}
         </Typography>
       </Container>
