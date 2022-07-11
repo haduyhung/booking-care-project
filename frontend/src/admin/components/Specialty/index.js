@@ -14,6 +14,7 @@ import {
   TextField,
 } from "@mui/material";
 import SpecialtyApi from "../../../apis/SpecialtyApi";
+import baseURL from "../../../utils";
 
 export default function Specialty() {
   const [specialties, setSpecialties] = useState();
@@ -21,6 +22,7 @@ export default function Specialty() {
   const [changeId, setChangeId] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
+  const [image, setImage] = useState();
 
   const handleClose = () => setModal(false);
 
@@ -44,6 +46,21 @@ export default function Specialty() {
     }, 500);
   };
 
+  const handleSend = () => {
+    let formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("file", image[0]);
+
+    SpecialtyApi.updateSpecialty(changeId, formData);
+    setTimeout(() => {
+      GetSpecialty();
+    }, 500);
+    setChangeId();
+    setModal(false);
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -52,6 +69,7 @@ export default function Specialty() {
             <TableRow>
               <TableCell align="left">Name</TableCell>
               <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Image</TableCell>
               <TableCell align="left">Edit</TableCell>
               <TableCell align="left">Delete</TableCell>
             </TableRow>
@@ -67,6 +85,16 @@ export default function Specialty() {
                 </TableCell>
                 <TableCell align="left" component="th">
                   {special.description}
+                </TableCell>
+                <TableCell align="left" component="th">
+                  {special.image ? (
+                    <img
+                      src={`${baseURL}${special.image}`}
+                      alt={special.name}
+                      width={100}
+                      height={50}
+                    />
+                  ) : null}
                 </TableCell>
                 <TableCell align="left">
                   <Stack
@@ -152,37 +180,27 @@ export default function Specialty() {
               onChange={(e) => setDescription(e.target.value)}
             />
 
+            <TextField
+              flex={1}
+              variant="outlined"
+              type="file"
+              onChange={(e) => setImage(e.target.files)}
+            />
+
+            {/* <form action="" method="POST" enctype="multipart/form-data">
+              <input
+                type="file"
+                name="userFile"
+                onChange={(e) => setImage(e.target.value)}
+              ></input>
+            </form> */}
+
             {!!changeId ? (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  SpecialtyApi.updateSpecialty(changeId, {
-                    name: name,
-                    description: description,
-                  });
-                  setTimeout(() => {
-                    GetSpecialty();
-                  }, 500);
-                  setChangeId();
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleSend}>
                 Update Specialty
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  SpecialtyApi.addNewSpecialty({
-                    name: name,
-                    description: description,
-                  });
-                  setTimeout(() => {
-                    GetSpecialty();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleSend}>
                 Add New Specialty
               </Button>
             )}
