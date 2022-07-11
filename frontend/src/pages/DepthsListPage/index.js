@@ -31,6 +31,7 @@ const DepthsListPage = () => {
       setLoading(false);
     }
   }, []);
+
   useEffect(() => {
     getSpecialty();
   }, [getSpecialty]);
@@ -80,7 +81,7 @@ const DepthsListPage = () => {
                   borderBottom: "none",
                 },
               }}
-              component="Box"
+              component="div"
             >
               <Link onClick={() => handleToDetail(depth)}>
                 {!depth.image ? (

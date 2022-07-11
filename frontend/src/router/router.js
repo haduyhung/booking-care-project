@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Admin from "../admin";
 import Layout from "../layout/DefaultLayout/index";
-import ClinicDetailPage from "../pages/ClinicDetailPage";
+import ClinicDetailPage from "../pages/ClinicDetailPage/clinicDetail";
 import DepthsListPage from "../pages/DepthsListPage";
 import DoctorsListPage from "../pages/DoctorsListPage";
 import ExaminationPackagesPage from "../pages/ExaminationPackagesPage";

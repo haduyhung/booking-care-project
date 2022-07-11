@@ -6,6 +6,7 @@ import {
   Typography,
   Container,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { useParams } from "react-router-dom";
@@ -14,10 +15,13 @@ import * as image from "../../assets";
 
 import baseURL from "../../utils";
 import ClinicApi from "../../apis/ClinicApi";
+import DepthsModal from "./depthsModal";
 
 const ClinicDetailPage = () => {
   let { id } = useParams();
   const [clinic, setClinic] = useState("");
+  const [depthsModal, setDepthsModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getClinicDetail = useCallback(async () => {
     try {
@@ -26,6 +30,8 @@ const ClinicDetailPage = () => {
       console.log("response", response);
     } catch (error) {
       console.error(error.response);
+    } finally {
+      setLoading(false);
     }
   }, [id]);
 
@@ -35,6 +41,19 @@ const ClinicDetailPage = () => {
 
   return (
     <Box>
+      {loading && (
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            position: "fixed",
+            pt: 2,
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      )}
       <Container role="presentation">
         <Breadcrumbs aria-label="breadcrumb" color="#45c3d2" sx={{ py: 1 }}>
           <Link underline="none" color="#45c3d2" href="/">
@@ -200,10 +219,12 @@ const ClinicDetailPage = () => {
             boxShadow:
               "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 0px 10px",
           }}
+          onClick={() => setDepthsModal(true)}
         >
           Chọn chuyên khoa
         </Box>
       </Box>
+      <DepthsModal modal={depthsModal} setModal={setDepthsModal} id={id} />
     </Box>
   );
 };

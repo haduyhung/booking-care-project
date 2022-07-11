@@ -28,6 +28,12 @@ const SpecialtyApi = {
 
     return requestClient.put(urlParam, data, token);
   },
+
+  getSpecialtiesClinic(id) {
+    const urlParam = `specialty/specialty-clinic/${id}`;
+
+    return requestClient.get(urlParam);
+  },
 };
 
 export default SpecialtyApi;

@@ -83,7 +83,8 @@ const Home = () => {
               <TextField
                 variant="standard"
                 {...params}
-                placeholder="Tìm Gói Khám"
+                sx={{ p: 1 }}
+                placeholder="Tìm Chuyên Khoa"
                 InputProps={{
                   ...params.InputProps,
                   type: "search",

@@ -14,6 +14,7 @@ import {
   TextField,
 } from "@mui/material";
 import SpecialtyApi from "../../../apis/SpecialtyApi";
+import baseURL from "../../../utils";
 
 export default function Specialty() {
   const [specialties, setSpecialties] = useState();
@@ -52,6 +53,7 @@ export default function Specialty() {
             <TableRow>
               <TableCell align="left">Name</TableCell>
               <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Image</TableCell>
               <TableCell align="left">Edit</TableCell>
               <TableCell align="left">Delete</TableCell>
             </TableRow>
@@ -67,6 +69,16 @@ export default function Specialty() {
                 </TableCell>
                 <TableCell align="left" component="th">
                   {special.description}
+                </TableCell>
+                <TableCell align="left" component="th">
+                  {!special.image ? null : (
+                    <img
+                      src={`${baseURL}${special.image}`}
+                      alt={special.id}
+                      width={150}
+                      height={100}
+                    />
+                  )}
                 </TableCell>
                 <TableCell align="left">
                   <Stack
@@ -149,6 +161,12 @@ export default function Specialty() {
               flex={1}
               label="Description"
               variant="outlined"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <TextField
+              flex={1}
+              variant="outlined"
+              type="file"
               onChange={(e) => setDescription(e.target.value)}
             />
 
