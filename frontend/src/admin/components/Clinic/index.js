@@ -51,6 +51,34 @@ export default function Clinic() {
     }, 500);
   };
 
+  const handleAdd = () => {
+    ClinicApi.addNewClinic({
+      name: name,
+      address: address,
+      phone: phone,
+      email: email,
+      specialties: specialties,
+    });
+    setTimeout(() => {
+      getClinic();
+    }, 500);
+    setModal(false);
+  };
+
+  const handleUpdate = () => {
+    ClinicApi.updateClinic(changeId, {
+      name: name,
+      address: address,
+      phone: phone,
+      email: email,
+      specialties: specialties,
+    });
+    setTimeout(() => {
+      getClinic();
+    }, 500);
+    setModal(false);
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -182,41 +210,11 @@ export default function Clinic() {
             />
 
             {!!changeId ? (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  ClinicApi.updateClinic(changeId, {
-                    name: name,
-                    address: address,
-                    phone: phone,
-                    email: email,
-                    specialties: specialties,
-                  });
-                  setTimeout(() => {
-                    getClinic();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleUpdate}>
                 Update Clinic
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  ClinicApi.addNewClinic({
-                    name: name,
-                    address: address,
-                    phone: phone,
-                    email: email,
-                    specialties: specialties,
-                  });
-                  setTimeout(() => {
-                    getClinic();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleAdd}>
                 Add New Clinic
               </Button>
             )}

@@ -96,6 +96,46 @@ export default function Users() {
     }, 500);
   };
 
+  const handleAdd = () => {
+    UserApi.addNewUser({
+      email: email,
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      gender: gender,
+      role: role,
+      birthday: moment(`${year}-${month}-${day}', 'Asia`),
+      address: address,
+      phoneNumber: phoneNumber,
+      clinicId: clinicId,
+      specialtyId: specialtyId,
+    });
+    setTimeout(() => {
+      GetUser();
+    }, 500);
+    setModal(false);
+  };
+
+  const handleUpdate = () => {
+    UserApi.update(changeId, {
+      email: email,
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      gender: gender,
+      role: role,
+      birthday: moment(`${year}-${month}-${day}', 'Asia`),
+      address: address,
+      phoneNumber: phoneNumber,
+      clinicId: clinicId,
+      specialtyId: specialtyId,
+    });
+    setTimeout(() => {
+      GetUser();
+    }, 500);
+    setModal(false);
+  };
+
   return (
     <Stack>
       <TableContainer sx={{ overflow: "auto" }} component={Paper}>
@@ -313,53 +353,11 @@ export default function Users() {
             </Select>
 
             {!!changeId ? (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  UserApi.update(changeId, {
-                    email: email,
-                    firstName: firstName,
-                    middleName: middleName,
-                    lastName: lastName,
-                    gender: gender,
-                    role: role,
-                    birthday: moment(`${year}-${month}-${day}', 'Asia`),
-                    address: address,
-                    phoneNumber: phoneNumber,
-                    clinicId: clinicId,
-                    specialtyId: specialtyId,
-                  });
-                  setTimeout(() => {
-                    GetUser();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleUpdate}>
                 Update User
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  UserApi.addNewUser({
-                    email: email,
-                    firstName: firstName,
-                    middleName: middleName,
-                    lastName: lastName,
-                    gender: gender,
-                    role: role,
-                    birthday: moment(`${year}-${month}-${day}', 'Asia`),
-                    address: address,
-                    phoneNumber: phoneNumber,
-                    clinicId: clinicId,
-                    specialtyId: specialtyId,
-                  });
-                  setTimeout(() => {
-                    GetUser();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleAdd}>
                 Add New User
               </Button>
             )}

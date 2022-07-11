@@ -83,6 +83,23 @@ export default function Schedules() {
     }, 500);
   };
 
+  const handleAdd = () => {
+    SchedulesApi.addNewSchedules({
+      doctorId: doctorSelectId,
+      date: `2022-${selectAddDate}T00:00:00.000Z`,
+      times: [
+        {
+          timeStart: `2022-${selectAddDate}${startDate}`,
+          timeEnd: `2022-${selectAddDate}${endDate}`,
+        },
+      ],
+    });
+    setTimeout(() => {
+      getDoctorSchedules();
+    }, 300);
+    setModal(false);
+  };
+
   return (
     <>
       <Stack direction="row" alignItems="center" p={2} spacing={2}>
@@ -268,26 +285,7 @@ export default function Schedules() {
                 </Select>
               </Stack>
             </Stack>
-            <Button
-              variant="contained"
-              onClick={() => {
-                console.log("asd", `2022-${selectAddDate}${startDate}`);
-                SchedulesApi.addNewSchedules({
-                  doctorId: doctorSelectId,
-                  date: `2022-${selectAddDate}T00:00:00.000Z`,
-                  times: [
-                    {
-                      timeStart: `2022-${selectAddDate}${startDate}`,
-                      timeEnd: `2022-${selectAddDate}${endDate}`,
-                    },
-                  ],
-                });
-                setTimeout(() => {
-                  getDoctorSchedules();
-                }, 300);
-                setModal(false);
-              }}
-            >
+            <Button variant="contained" onClick={handleAdd}>
               Add New Schedules
             </Button>
           </Stack>
