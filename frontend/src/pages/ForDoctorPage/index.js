@@ -42,6 +42,7 @@ const ForDoctorsPage = () => {
   const [doctorSchedules, setDoctorSchedules] = useState();
   const [timeSchedules, setTimeSchedules] = useState();
 
+  const [changeId, setChangeId] = useState();
   const [modal, setModal] = useState(false);
   const [name, setName] = useState();
   const [gender, setGender] = useState();
@@ -211,6 +212,7 @@ const ForDoctorsPage = () => {
                         schedule?.timeEnd
                       ).format("LT")}`
                     );
+                    setChangeId(schedule.id);
                     setModal(true);
                   }}
                 >
@@ -350,18 +352,23 @@ const ForDoctorsPage = () => {
                 variant="outlined"
                 onChange={(e) => setReason(e.target.value)}
               />
-              <Stack direction="row"></Stack>
+              <Stack p={3} bgcolor="#f6f6f6" height={80} direction="row">
+                <Typography flex={2}>Gia Kham:</Typography>
+                <Stack flex={6}></Stack>
+                <Typography flex={1}>{doctor?.doctorInfor?.price}đ</Typography>
+              </Stack>
               <Button
                 variant="contained"
                 onClick={() => {
-                  if (name && phone && gender && address) {
-                    SchedulesApi.deleteSchedules(doctor.id);
+                  if (name && gender && phone && birthday && address) {
+                    SchedulesApi.deleteSchedules(changeId);
                     setModal(false);
                     setTimeout(() => {
                       getDoctorSchedules();
                     }, 500);
+                  } else {
+                    alert("Ban Chua Nhap Du Thong Tin");
                   }
-                  alert("Ban chua nhap du thong tin!");
                 }}
               >
                 Xác nhận đặt lịch
