@@ -44,7 +44,10 @@ export default function Users() {
   const [clinicId, setClinicId] = useState("");
   const [specialtyId, setSpecialtyId] = useState("");
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const GetUser = useCallback(async () => {
     try {
@@ -329,7 +332,6 @@ export default function Users() {
                   setTimeout(() => {
                     GetUser();
                   }, 500);
-                  setChangeId();
                   setModal(false);
                 }}
               >

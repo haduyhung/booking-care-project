@@ -35,7 +35,10 @@ export default function Schedules() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const getDoctor = useCallback(async () => {
     try {

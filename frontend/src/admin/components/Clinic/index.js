@@ -25,7 +25,10 @@ export default function Clinic() {
   const [phone, setPhone] = useState();
   const [specialties, setSpecialties] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const getClinic = useCallback(async () => {
     try {
@@ -192,7 +195,6 @@ export default function Clinic() {
                   setTimeout(() => {
                     getClinic();
                   }, 500);
-                  setChangeId();
                   setModal(false);
                 }}
               >

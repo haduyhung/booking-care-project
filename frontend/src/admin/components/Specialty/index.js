@@ -24,7 +24,10 @@ export default function Specialty() {
   const [description, setDescription] = useState();
   const [image, setImage] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const GetSpecialty = useCallback(async () => {
     try {
@@ -46,7 +49,21 @@ export default function Specialty() {
     }, 500);
   };
 
-  const handleSend = () => {
+  const handleAdd = () => {
+    let formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("file", image[0]);
+
+    SpecialtyApi.addNewSpecialty(formData);
+    setTimeout(() => {
+      GetSpecialty();
+    }, 500);
+    setModal(false);
+  };
+
+  const handleUpdate = () => {
     let formData = new FormData();
 
     formData.append("name", name);
@@ -187,20 +204,12 @@ export default function Specialty() {
               onChange={(e) => setImage(e.target.files)}
             />
 
-            {/* <form action="" method="POST" enctype="multipart/form-data">
-              <input
-                type="file"
-                name="userFile"
-                onChange={(e) => setImage(e.target.value)}
-              ></input>
-            </form> */}
-
             {!!changeId ? (
-              <Button variant="contained" onClick={handleSend}>
+              <Button variant="contained" onClick={handleUpdate}>
                 Update Specialty
               </Button>
             ) : (
-              <Button variant="contained" onClick={handleSend}>
+              <Button variant="contained" onClick={handleAdd}>
                 Add New Specialty
               </Button>
             )}
