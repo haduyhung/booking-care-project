@@ -14,6 +14,7 @@ import {
   Button,
 } from "@mui/material";
 import ClinicApi from "../../../apis/ClinicApi";
+import baseURL from "../../../utils";
 
 export default function Clinic() {
   const [clinics, setClinics] = useState();
@@ -24,8 +25,12 @@ export default function Clinic() {
   const [address, setAddress] = useState();
   const [phone, setPhone] = useState();
   const [specialties, setSpecialties] = useState();
+  const [image, setImage] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const getClinic = useCallback(async () => {
     try {
@@ -48,6 +53,36 @@ export default function Clinic() {
     }, 500);
   };
 
+  const handleAdd = () => {
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("address", address);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("specialties", specialties);
+    formData.append("file", image[0]);
+    ClinicApi.addNewClinic(formData);
+    setTimeout(() => {
+      getClinic();
+    }, 500);
+    setModal(false);
+  };
+
+  const handleUpdate = () => {
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("address", address);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("specialties", specialties);
+    formData.append("file", image[0]);
+    ClinicApi.updateClinic(changeId, formData);
+    setTimeout(() => {
+      getClinic();
+    }, 500);
+    setModal(false);
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -58,6 +93,7 @@ export default function Clinic() {
               <TableCell align="left">Address</TableCell>
               <TableCell align="left">Phone</TableCell>
               <TableCell align="left">Email</TableCell>
+              <TableCell align="left">Image</TableCell>
               <TableCell align="left">Edit</TableCell>
               <TableCell align="left">Delete</TableCell>
             </TableRow>
@@ -76,6 +112,16 @@ export default function Clinic() {
                 </TableCell>
                 <TableCell align="left">{clinic.phone}</TableCell>
                 <TableCell align="left">{clinic.email}</TableCell>
+                <TableCell align="left">
+                  {clinic.image && (
+                    <img
+                      src={`${baseURL}${clinic.image}`}
+                      alt={clinic.name}
+                      width={100}
+                      height={50}
+                    />
+                  )}
+                </TableCell>
                 <TableCell align="left">
                   <Stack
                     sx={{
@@ -178,43 +224,19 @@ export default function Clinic() {
               onChange={(e) => setSpecialties(e.target.value)}
             />
 
+            <TextField
+              flex={1}
+              variant="outlined"
+              type="file"
+              onChange={(e) => setImage(e.target.files)}
+            />
+
             {!!changeId ? (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  ClinicApi.updateClinic(changeId, {
-                    name: name,
-                    address: address,
-                    phone: phone,
-                    email: email,
-                    specialties: specialties,
-                  });
-                  setTimeout(() => {
-                    getClinic();
-                  }, 500);
-                  setChangeId();
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleUpdate}>
                 Update Clinic
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  ClinicApi.addNewClinic({
-                    name: name,
-                    address: address,
-                    phone: phone,
-                    email: email,
-                    specialties: specialties,
-                  });
-                  setTimeout(() => {
-                    getClinic();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleAdd}>
                 Add New Clinic
               </Button>
             )}

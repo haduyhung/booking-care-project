@@ -20,6 +20,7 @@ import {
 import UserApi from "../../../apis/UserApi";
 import ClinicApi from "../../../apis/ClinicApi";
 import SpecialtyApi from "../../../apis/SpecialtyApi";
+import baseURL from "../../../utils";
 
 export default function Users() {
   //api
@@ -43,8 +44,12 @@ export default function Users() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [clinicId, setClinicId] = useState("");
   const [specialtyId, setSpecialtyId] = useState("");
+  const [image, setImage] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const GetUser = useCallback(async () => {
     try {
@@ -72,6 +77,52 @@ export default function Users() {
       console.error(error.response);
     }
   }, []);
+
+  const handleAdd = () => {
+    let formData = new FormData();
+
+    formData.append("email", email);
+    formData.append("firstName", firstName);
+    formData.append("middleName", middleName);
+    formData.append("lastName", lastName);
+    formData.append("gender", gender);
+    formData.append("role", role);
+    formData.append("birthday", `${year}-${month}-${day}`);
+    formData.append("address", address);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("clinicId", clinicId);
+    formData.append("specialtyId", specialtyId);
+    formData.append("file", image[0]);
+
+    UserApi.addNewUser(formData);
+    setTimeout(() => {
+      GetUser();
+    }, 500);
+    setModal(false);
+  };
+
+  const handleUpdate = () => {
+    let formData = new FormData();
+
+    formData.append("email", email);
+    formData.append("firstName", firstName);
+    formData.append("middleName", middleName);
+    formData.append("lastName", lastName);
+    formData.append("gender", gender);
+    formData.append("role", role);
+    formData.append("birthday", `${year}-${month}-${day}`);
+    formData.append("address", address);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("clinicId", clinicId);
+    formData.append("specialtyId", specialtyId);
+    formData.append("file", image[0]);
+
+    UserApi.update(changeId, formData);
+    setTimeout(() => {
+      GetUser();
+    }, 500);
+    setModal(false);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -106,6 +157,7 @@ export default function Users() {
               <TableCell align="left">Birthday</TableCell>
               <TableCell align="left">Address</TableCell>
               <TableCell align="left">Phone Number</TableCell>
+              <TableCell align="left">Image</TableCell>
               <TableCell align="left">Edit</TableCell>
               <TableCell align="left">Delete</TableCell>
             </TableRow>
@@ -129,6 +181,16 @@ export default function Users() {
                 </TableCell>
                 <TableCell align="left">{user.address}</TableCell>
                 <TableCell align="left">{user.phoneNumber}</TableCell>
+                <TableCell align="left">
+                  {user.avatar ? (
+                    <img
+                      src={`${baseURL}${user.avatar}`}
+                      alt={user.id}
+                      width={50}
+                      height={50}
+                    />
+                  ) : null}
+                </TableCell>
                 <TableCell align="left">
                   <Stack
                     sx={{
@@ -309,55 +371,19 @@ export default function Users() {
               ))}
             </Select>
 
+            <TextField
+              flex={1}
+              variant="outlined"
+              type="file"
+              onChange={(e) => setImage(e.target.files)}
+            />
+
             {!!changeId ? (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  UserApi.update(changeId, {
-                    email: email,
-                    firstName: firstName,
-                    middleName: middleName,
-                    lastName: lastName,
-                    gender: gender,
-                    role: role,
-                    birthday: moment(`${year}-${month}-${day}', 'Asia`),
-                    address: address,
-                    phoneNumber: phoneNumber,
-                    clinicId: clinicId,
-                    specialtyId: specialtyId,
-                  });
-                  setTimeout(() => {
-                    GetUser();
-                  }, 500);
-                  setChangeId();
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleUpdate}>
                 Update User
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  UserApi.addNewUser({
-                    email: email,
-                    firstName: firstName,
-                    middleName: middleName,
-                    lastName: lastName,
-                    gender: gender,
-                    role: role,
-                    birthday: moment(`${year}-${month}-${day}', 'Asia`),
-                    address: address,
-                    phoneNumber: phoneNumber,
-                    clinicId: clinicId,
-                    specialtyId: specialtyId,
-                  });
-                  setTimeout(() => {
-                    GetUser();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleAdd}>
                 Add New User
               </Button>
             )}

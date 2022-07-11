@@ -22,8 +22,12 @@ export default function Specialty() {
   const [changeId, setChangeId] = useState();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
+  const [image, setImage] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const GetSpecialty = useCallback(async () => {
     try {
@@ -43,6 +47,35 @@ export default function Specialty() {
     setTimeout(() => {
       GetSpecialty();
     }, 500);
+  };
+
+  const handleAdd = () => {
+    let formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("file", image[0]);
+
+    SpecialtyApi.addNewSpecialty(formData);
+    setTimeout(() => {
+      GetSpecialty();
+    }, 500);
+    setModal(false);
+  };
+
+  const handleUpdate = () => {
+    let formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("file", image[0]);
+
+    SpecialtyApi.updateSpecialty(changeId, formData);
+    setTimeout(() => {
+      GetSpecialty();
+    }, 500);
+    setChangeId();
+    setModal(false);
   };
 
   return (
@@ -71,14 +104,14 @@ export default function Specialty() {
                   {special.description}
                 </TableCell>
                 <TableCell align="left" component="th">
-                  {!special.image ? null : (
+                  {special.image ? (
                     <img
                       src={`${baseURL}${special.image}`}
-                      alt={special.id}
-                      width={150}
-                      height={100}
+                      alt={special.name}
+                      width={100}
+                      height={50}
                     />
-                  )}
+                  ) : null}
                 </TableCell>
                 <TableCell align="left">
                   <Stack
@@ -170,37 +203,19 @@ export default function Specialty() {
               onChange={(e) => setDescription(e.target.value)}
             />
 
+            <TextField
+              flex={1}
+              variant="outlined"
+              type="file"
+              onChange={(e) => setImage(e.target.files)}
+            />
+
             {!!changeId ? (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  SpecialtyApi.updateSpecialty(changeId, {
-                    name: name,
-                    description: description,
-                  });
-                  setTimeout(() => {
-                    GetSpecialty();
-                  }, 500);
-                  setChangeId();
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleUpdate}>
                 Update Specialty
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                onClick={() => {
-                  SpecialtyApi.addNewSpecialty({
-                    name: name,
-                    description: description,
-                  });
-                  setTimeout(() => {
-                    GetSpecialty();
-                  }, 500);
-                  setModal(false);
-                }}
-              >
+              <Button variant="contained" onClick={handleAdd}>
                 Add New Specialty
               </Button>
             )}

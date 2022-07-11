@@ -35,7 +35,10 @@ export default function Schedules() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
-  const handleClose = () => setModal(false);
+  const handleClose = () => {
+    setChangeId();
+    setModal(false);
+  };
 
   const getDoctor = useCallback(async () => {
     try {
@@ -78,6 +81,23 @@ export default function Schedules() {
     setTimeout(() => {
       getDoctorSchedules();
     }, 500);
+  };
+
+  const handleAdd = () => {
+    SchedulesApi.addNewSchedules({
+      doctorId: doctorSelectId,
+      date: `2022-${selectAddDate}T00:00:00.000Z`,
+      times: [
+        {
+          timeStart: `2022-${selectAddDate}${startDate}`,
+          timeEnd: `2022-${selectAddDate}${endDate}`,
+        },
+      ],
+    });
+    setTimeout(() => {
+      getDoctorSchedules();
+    }, 300);
+    setModal(false);
   };
 
   return (
@@ -265,26 +285,7 @@ export default function Schedules() {
                 </Select>
               </Stack>
             </Stack>
-            <Button
-              variant="contained"
-              onClick={() => {
-                console.log("asd", `2022-${selectAddDate}${startDate}`);
-                SchedulesApi.addNewSchedules({
-                  doctorId: doctorSelectId,
-                  date: `2022-${selectAddDate}T00:00:00.000Z`,
-                  times: [
-                    {
-                      timeStart: `2022-${selectAddDate}${startDate}`,
-                      timeEnd: `2022-${selectAddDate}${endDate}`,
-                    },
-                  ],
-                });
-                setTimeout(() => {
-                  getDoctorSchedules();
-                }, 300);
-                setModal(false);
-              }}
-            >
+            <Button variant="contained" onClick={handleAdd}>
               Add New Schedules
             </Button>
           </Stack>
