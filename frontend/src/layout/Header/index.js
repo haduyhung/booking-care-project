@@ -20,6 +20,7 @@ import { FaYoutubeSquare } from "react-icons/fa";
 import LogoutIcons from "@mui/icons-material/Logout";
 import Login from "../Login";
 import Register from "../Register";
+import { useNavigate } from "react-router-dom";
 
 const pages = [
   {
@@ -64,6 +65,7 @@ const Header = () => {
   const [token, setToken] = useState();
   const [name, setName] = useState("");
   const [reset, setReset] = useState(0);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -210,6 +212,7 @@ const Header = () => {
                       localStorage.clear();
                       setToken();
                       setReset(reset + 1);
+                      navigate("/");
                     }}
                   />
                 </Stack>

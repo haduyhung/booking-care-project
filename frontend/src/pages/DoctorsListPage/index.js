@@ -145,7 +145,7 @@ const DoctorsListPage = () => {
                   }}
                 >
                   <ListItemText sx={{ fontSize: 5 }}>
-                    {doctor.specialty.name}
+                    {doctor.specialty?.name}
                   </ListItemText>
                 </Link>
               </Box>

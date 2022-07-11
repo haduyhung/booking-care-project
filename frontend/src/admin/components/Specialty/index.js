@@ -196,6 +196,12 @@ export default function Specialty() {
               variant="outlined"
               onChange={(e) => setDescription(e.target.value)}
             />
+            <TextField
+              flex={1}
+              variant="outlined"
+              type="file"
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
             <TextField
               flex={1}

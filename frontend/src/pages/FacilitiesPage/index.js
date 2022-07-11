@@ -22,6 +22,7 @@ const FacilitiesPage = () => {
     setLoading(true);
     try {
       const data = await ClinicApi.getAllClinics();
+      console.log("data", data);
       setClinic(data.data?.data);
     } catch (error) {
       console.log(error);
@@ -33,8 +34,8 @@ const FacilitiesPage = () => {
     callGetAllClinics();
   }, []);
 
-  const handleToDetail = (depth) => {
-    navigate(`/ForPatientsPage/${depth.id}`);
+  const handleToDetail = (clinic) => {
+    navigate(`/ClinicDetailPage/${clinic.id}`);
   };
 
   return (

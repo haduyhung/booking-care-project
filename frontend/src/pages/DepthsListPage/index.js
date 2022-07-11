@@ -23,8 +23,8 @@ const DepthsListPage = () => {
     setLoading(true);
     try {
       const response = await SpecialtyApi.getAll();
+      console.log("response", response);
       setSpecialties(response.data.data);
-      console.log("rs", response.data.data);
     } catch (error) {
       console.error(error.response);
     } finally {
@@ -42,7 +42,7 @@ const DepthsListPage = () => {
 
   return (
     <Box bgcolor="#F5F5F5">
-      <Box bgcolor="#FFFFFF" sx={{ mt: 1, width: "100%" }}>
+      <Box bgcolor="#FFFFFF" sx={{ mt: 1, width: "100%", minHeight: "100px" }}>
         <List
           sx={{
             width: "100%",
@@ -59,6 +59,8 @@ const DepthsListPage = () => {
                 width: "100%",
                 display: "flex",
                 justifyContent: "center",
+                position: "fixed",
+                pt: 2,
               }}
             >
               <CircularProgress />
@@ -79,7 +81,7 @@ const DepthsListPage = () => {
                   borderBottom: "none",
                 },
               }}
-              component="Box"
+              component="div"
             >
               <Link onClick={() => handleToDetail(depth)}>
                 {!depth.image ? (
