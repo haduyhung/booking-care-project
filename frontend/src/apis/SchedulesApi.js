@@ -4,8 +4,6 @@ const SchedulesApi = {
   getSchedules(param) {
     const urlParam = `schedules`;
 
-    console.log("pram", param);
-
     return requestClient.get(urlParam, { params: param });
   },
 
@@ -18,7 +16,6 @@ const SchedulesApi = {
   addNewSchedules(data, token) {
     const urlParam = `schedules`;
 
-    console.log("timeeeee", data);
     return requestClient.post(urlParam, data, token);
   },
 };

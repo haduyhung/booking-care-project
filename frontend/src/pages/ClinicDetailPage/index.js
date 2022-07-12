@@ -27,7 +27,6 @@ const ClinicDetailPage = () => {
     try {
       const response = await ClinicApi.getOne(id);
       setClinic(response.data);
-      console.log("response", response);
     } catch (error) {
       console.error(error.response);
     } finally {
@@ -138,7 +137,7 @@ const ClinicDetailPage = () => {
               color: "white",
               fontWeight: "600",
             }}
-            onClick={() => console.log("huhu")}
+            onClick={() => {}}
           >
             Đặt lịch khám
           </Box>

@@ -73,7 +73,6 @@ const ForDoctorsPage = () => {
         doctorId: id,
         date: date,
       });
-      console.log("res", response.data.data);
       setDoctorSchedules(response.data.data);
     } catch (error) {
       console.error(error.response);
@@ -353,9 +352,11 @@ const ForDoctorsPage = () => {
                 onChange={(e) => setReason(e.target.value)}
               />
               <Stack p={3} bgcolor="#f6f6f6" height={80} direction="row">
-                <Typography flex={2}>Gia Kham:</Typography>
+                <Typography flex={2}>Giá khám:</Typography>
                 <Stack flex={6}></Stack>
-                <Typography flex={1}>{doctor?.doctorInfor?.price}đ</Typography>
+                <Typography flex={1}>
+                  {doctor?.doctorInfor?.price.toLocaleString("en-US")}đ
+                </Typography>
               </Stack>
               <Button
                 variant="contained"

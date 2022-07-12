@@ -22,7 +22,6 @@ const FacilitiesPage = () => {
     setLoading(true);
     try {
       const data = await ClinicApi.getAllClinics();
-      console.log("data", data);
       setClinic(data.data?.data);
     } catch (error) {
       console.log(error);

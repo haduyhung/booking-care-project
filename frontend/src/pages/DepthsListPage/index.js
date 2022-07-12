@@ -23,7 +23,6 @@ const DepthsListPage = () => {
     setLoading(true);
     try {
       const response = await SpecialtyApi.getAll();
-      console.log("response", response);
       setSpecialties(response.data.data);
     } catch (error) {
       console.error(error.response);

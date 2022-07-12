@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Link, List, ListItem, ListItemText, Modal } from "@mui/material";
 import SpecialtyApi from "../../apis/SpecialtyApi";
 
 function DepthsModal({ modal, setModal, id }) {
   const [depthsClinic, setDepthsClinic] = useState([]);
-  console.log("depthsClinic", depthsClinic);
 
   const handleClose = () => {
     setModal(false);

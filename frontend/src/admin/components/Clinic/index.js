@@ -12,8 +12,11 @@ import {
   Modal,
   TextField,
   Button,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import ClinicApi from "../../../apis/ClinicApi";
+import SpecialtyApi from "../../../apis/SpecialtyApi";
 import baseURL from "../../../utils";
 
 export default function Clinic() {
@@ -25,6 +28,7 @@ export default function Clinic() {
   const [address, setAddress] = useState();
   const [phone, setPhone] = useState();
   const [specialties, setSpecialties] = useState();
+  const [specialtyId, setSpecialtyId] = useState("");
   const [image, setImage] = useState();
 
   const handleClose = () => {
@@ -41,9 +45,23 @@ export default function Clinic() {
     }
   }, []);
 
+  const GetSpecialty = useCallback(async () => {
+    try {
+      const response = await SpecialtyApi.getAll();
+      setSpecialties(response.data.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  }, []);
+
   useEffect(() => {
-    getClinic();
-  }, [getClinic]);
+    setTimeout(() => {
+      getClinic();
+    }, 300);
+    setTimeout(() => {
+      GetSpecialty();
+    }, 300);
+  }, [getClinic, GetSpecialty]);
 
   const handleDelete = (id) => {
     ClinicApi.deleteClinic(id);
@@ -59,7 +77,7 @@ export default function Clinic() {
     formData.append("address", address);
     formData.append("phone", phone);
     formData.append("email", email);
-    formData.append("specialties", specialties);
+    formData.append("specialtyId", specialtyId);
     formData.append("file", image[0]);
     ClinicApi.addNewClinic(formData);
     setTimeout(() => {
@@ -74,12 +92,13 @@ export default function Clinic() {
     formData.append("address", address);
     formData.append("phone", phone);
     formData.append("email", email);
-    formData.append("specialties", specialties);
+    formData.append("specialtyId", specialtyId);
     formData.append("file", image[0]);
     ClinicApi.updateClinic(changeId, formData);
     setTimeout(() => {
       getClinic();
     }, 500);
+    setChangeId();
     setModal(false);
   };
 
@@ -217,12 +236,20 @@ export default function Clinic() {
               variant="outlined"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <TextField
+            <Select
               flex={1}
-              label="Specialties"
+              value={specialtyId}
               variant="outlined"
-              onChange={(e) => setSpecialties(e.target.value)}
-            />
+              onChange={(e) => setSpecialtyId(e.target.value)}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              {specialties?.map((special, index) => (
+                <MenuItem key={index} value={special.id}>
+                  {special.name}
+                </MenuItem>
+              ))}
+            </Select>
 
             <TextField
               flex={1}

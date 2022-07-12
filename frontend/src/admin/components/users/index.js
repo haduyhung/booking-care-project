@@ -121,6 +121,7 @@ export default function Users() {
     setTimeout(() => {
       GetUser();
     }, 500);
+    setChangeId();
     setModal(false);
   };
 

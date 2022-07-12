@@ -45,7 +45,6 @@ export default function ClinicDetail() {
   const getDoctor = useCallback(async () => {
     try {
       const response = await DoctorApi.getAll({ clinicId: id });
-      console.log("rs", response);
       setDoctors(response.data.data);
     } catch (error) {
       console.error(error.response);
